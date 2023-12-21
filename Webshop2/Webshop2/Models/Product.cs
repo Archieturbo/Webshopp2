@@ -14,7 +14,7 @@ namespace Webshop2.Models
             Supplier = new HashSet<Supplier>();
             ProductCategory = new HashSet<ProductCategory>();
         }
-        public int ProductId { get; set; }
+        public int Id { get; set; }
         public string? Name { get; set; }
         public string? Color { get; set; }
         public double? Price { get; set; }

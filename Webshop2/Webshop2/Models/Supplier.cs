@@ -8,7 +8,7 @@ namespace Webshop2.Models
 {
     internal partial class Supplier
     {
-        public int SupplierId { get; set; }
+        public int Id { get; set; }
 
         public string? CompanyName { get; set; }
 

@@ -12,7 +12,7 @@ namespace Webshop2.Models
         {
             shoppingCart = new HashSet<ShoppingCart>();
         }
-        public int OrderDetailsId { get; set; }
+        public int Id { get; set; }
         public int OrderId { get; set; }
         public int ProductId { get; set; }
         public int ShoppingCartId { get; set; }

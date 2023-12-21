@@ -8,7 +8,7 @@ namespace Webshop2.Models
 {
     internal class ProductCategory
     {
-        public int ProductCategoryId { get; set; }
+        public int Id { get; set; }
         public string? CategoryName { get; set; }
         public virtual ICollection<Product> product { get; set; }
 

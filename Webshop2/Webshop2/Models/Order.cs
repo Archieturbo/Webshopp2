@@ -14,7 +14,7 @@ namespace Webshop2.Models
             Customer = new HashSet<Customer>(); 
             Shipping = new HashSet<Shipping>();
         }
-        public int OrderId { get; set; }
+        public int Id { get; set; }
         public int CustomerId { get; set; }
         public int ShippingId { get; set; }
         public DateTime? OrderDate { get; set; }

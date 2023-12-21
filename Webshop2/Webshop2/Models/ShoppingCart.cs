@@ -8,7 +8,7 @@ namespace Webshop2.Models
 {
     internal partial class ShoppingCart
     {
-        public int ShoppingCartId { get; set; }
+        public int Id { get; set; }
         public int ProductId { get; set; }
         public int CustomerId { get; set; }
         public int OrderId { get; set; }
