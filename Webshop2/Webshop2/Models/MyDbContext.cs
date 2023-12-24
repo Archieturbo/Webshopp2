@@ -10,12 +10,9 @@ namespace Webshop2.Models
     internal class MyDbContext : DbContext
     {
         public DbSet<Supplier> Supplier { get; set; }
-        public DbSet<ShoppingCart> ShoppingCart { get; set; }
-        public DbSet<ProductCategory> ProductCategory { get; set; }
-        public DbSet<Shipping> Shipping { get; set; }
-        public DbSet<Customer> Customer { get; set; }
-        public DbSet<Order> Order { get; set; }
-        public DbSet<OrderDetails> OrderDetails { get; set; }
+        
+        public DbSet<Category> Category { get; set; }
+         
         public DbSet<Product> Product { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

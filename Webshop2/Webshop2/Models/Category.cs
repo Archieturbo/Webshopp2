@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Webshop2.Models
 {
-    internal class ProductCategory
+    internal class Category
     {
         public int Id { get; set; }
         public string? CategoryName { get; set; }
-        public virtual ICollection<Product> product { get; set; }
+        public ICollection<Product> product { get; set; }
 
 
 

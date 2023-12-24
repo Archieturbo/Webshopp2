@@ -8,31 +8,14 @@ namespace Webshop2.Models
 {
     internal class Product
     {
-        public Product()
-        {
-            OrderDetails = new HashSet<OrderDetails>();
-            Supplier = new HashSet<Supplier>();
-            ProductCategory = new HashSet<ProductCategory>();
-        }
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Color { get; set; }
-        public double? Price { get; set; }
+        public int? SupplierId { get; set; }
         public int? UnitsInStock { get; set; }
-        public int SupplierId { get; set; }
-        public int ProductCategoryId { get; set; }
-        public ICollection<OrderDetails> OrderDetails { get; set; }
-        public ICollection<Supplier> Supplier { get; set; }
-        public ICollection<ProductCategory> ProductCategory { get; set; }
-
-        public enum Size
-        {
-            Small,
-            Medium,
-            Large,
-        }
-
-
+        public double? Price { get; set; }
+        public ICollection<Category> Categories { get; set; }
+        public Supplier? Supplier { get; set; }
 
 
     }
