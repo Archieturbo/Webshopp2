@@ -15,6 +15,9 @@ namespace Webshop2.Models
          
         public DbSet<Product> Product { get; set; }
 
+        public DbSet<Customer> Customer { get; set; }
+        public DbSet<Order> Order { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=Webshop2;Trusted_Connection=True;TrustServerCertificate=True");

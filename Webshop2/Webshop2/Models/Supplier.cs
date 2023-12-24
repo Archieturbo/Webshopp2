@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Webshop2.Models
 {
-    internal class Supplier
+    internal partial class Supplier
     {
         public Supplier()
         {
-            product = new HashSet<Product>();
+            Products = new HashSet<Product>();
         }
         public int Id { get; set; }
 
@@ -23,7 +23,7 @@ namespace Webshop2.Models
         public string? Address { get; set; }
 
         public string? Phone { get; set; }
-        public ICollection<Product> product { get; set; }
+        public ICollection<Product> Products { get; set; }
 
     }
 }

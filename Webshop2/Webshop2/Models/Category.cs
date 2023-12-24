@@ -10,7 +10,7 @@ namespace Webshop2.Models
     {
         public int Id { get; set; }
         public string? CategoryName { get; set; }
-        public ICollection<Product> product { get; set; }
+        public ICollection<Product> Products { get; set; }
 
 
 
