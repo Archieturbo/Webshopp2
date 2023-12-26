@@ -12,8 +12,8 @@ using Webshop2.Models;
 namespace Webshop2.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20231224192350_second")]
-    partial class second
+    [Migration("20231226100753_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,6 +87,25 @@ namespace Webshop2.Migrations
                     b.ToTable("Customer");
                 });
 
+            modelBuilder.Entity("Webshop2.Models.Delivery", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double?>("Price")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Delivery");
+                });
+
             modelBuilder.Entity("Webshop2.Models.Order", b =>
                 {
                     b.Property<int>("Id")
@@ -111,7 +130,40 @@ namespace Webshop2.Migrations
 
                     b.HasIndex("CustomerId");
 
+                    b.HasIndex("DeliveryId");
+
                     b.ToTable("Order");
+                });
+
+            modelBuilder.Entity("Webshop2.Models.Orderdetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("DeliveryID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeliveryID");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Orderdetail");
                 });
 
             modelBuilder.Entity("Webshop2.Models.Product", b =>
@@ -193,7 +245,34 @@ namespace Webshop2.Migrations
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId");
 
+                    b.HasOne("Webshop2.Models.Delivery", "Delivery")
+                        .WithMany("Orders")
+                        .HasForeignKey("DeliveryId");
+
                     b.Navigation("Customer");
+
+                    b.Navigation("Delivery");
+                });
+
+            modelBuilder.Entity("Webshop2.Models.Orderdetail", b =>
+                {
+                    b.HasOne("Webshop2.Models.Delivery", "Shipping")
+                        .WithMany()
+                        .HasForeignKey("DeliveryID");
+
+                    b.HasOne("Webshop2.Models.Order", "Order")
+                        .WithMany("Orderdetails")
+                        .HasForeignKey("OrderId");
+
+                    b.HasOne("Webshop2.Models.Product", "Product")
+                        .WithMany("Orderdetails")
+                        .HasForeignKey("ProductId");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Shipping");
                 });
 
             modelBuilder.Entity("Webshop2.Models.Product", b =>
@@ -208,6 +287,21 @@ namespace Webshop2.Migrations
             modelBuilder.Entity("Webshop2.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Webshop2.Models.Delivery", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("Webshop2.Models.Order", b =>
+                {
+                    b.Navigation("Orderdetails");
+                });
+
+            modelBuilder.Entity("Webshop2.Models.Product", b =>
+                {
+                    b.Navigation("Orderdetails");
                 });
 
             modelBuilder.Entity("Webshop2.Models.Supplier", b =>

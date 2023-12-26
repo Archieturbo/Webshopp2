@@ -15,6 +15,9 @@ namespace Webshop2.Models
          
         public DbSet<Product> Product { get; set; }
 
+        public DbSet<Orderdetail> Orderdetail { get; set; }
+
+        public DbSet<Delivery> Delivery { get; set; }
         public DbSet<Customer> Customer { get; set; }
         public DbSet<Order> Order { get; set; }
 

@@ -8,11 +8,17 @@ namespace Webshop2.Models
 {
     internal class Order
     {
+        public Order()
+        {
+            Orderdetails = new HashSet<Orderdetail>();
+        }
         public int Id { get; set; }
         public int? CustomerId { get; set; }
         public DateTime? OrderDate { get; set; }
         public string? Shipaddress { get; set; }
         public int? DeliveryId { get; set; }
         public Customer? Customer { get; set; }
+        public Delivery? Delivery { get; set; }
+        public ICollection<Orderdetail> Orderdetails { get; set; }
     }
 }
