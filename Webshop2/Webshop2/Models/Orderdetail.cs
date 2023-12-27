@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Webshop2.Models
 {
-    internal class Orderdetail
+    public class Orderdetail
     {
         public int Id { get; set; }
 

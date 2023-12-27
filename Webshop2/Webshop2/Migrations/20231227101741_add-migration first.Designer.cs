@@ -12,8 +12,8 @@ using Webshop2.Models;
 namespace Webshop2.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20231226100753_first")]
-    partial class first
+    [Migration("20231227101741_add-migration first")]
+    partial class addmigrationfirst
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -175,6 +175,9 @@ namespace Webshop2.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")

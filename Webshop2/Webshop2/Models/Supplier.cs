@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Webshop2.Models
 {
-    internal partial class Supplier
+    public partial class Supplier
     {
         public Supplier()
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Webshop2.Models
 {
-    internal class Product
+    public class Product
     {
         public Product()
         {
@@ -17,6 +17,7 @@ namespace Webshop2.Models
         public int Id { get; set; }
         public string? Name { get; set; }
         public string? Color { get; set; }
+        public string? Description { get; set; }
         public int? SupplierId { get; set; }
         public int? UnitsInStock { get; set; }
         public double? Price { get; set; }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Webshop2.Migrations
 {
     /// <inheritdoc />
-    public partial class first : Migration
+    public partial class addmigrationfirst : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -107,6 +107,7 @@ namespace Webshop2.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SupplierId = table.Column<int>(type: "int", nullable: true),
                     UnitsInStock = table.Column<int>(type: "int", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: true)

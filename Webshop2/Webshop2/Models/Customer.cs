@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Webshop2.Models
 {
-    internal class Customer
+    public class Customer
     {
         public Customer()
         {

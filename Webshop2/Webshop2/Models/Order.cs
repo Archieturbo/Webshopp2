@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Webshop2.Models
 {
-    internal class Order
+    public class Order
     {
         public Order()
         {

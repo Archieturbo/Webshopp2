@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Webshop2.Models
 {
-    internal class MyDbContext : DbContext
+    public class MyDbContext : DbContext
     {
         public DbSet<Supplier> Supplier { get; set; }
         
@@ -27,6 +27,7 @@ namespace Webshop2.Models
         }
 
     }
+    
 
 }
 
