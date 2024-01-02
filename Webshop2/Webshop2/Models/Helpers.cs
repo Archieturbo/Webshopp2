@@ -113,7 +113,8 @@ namespace Webshop2.Models
                         }
                         break;
                     case 3:
-                            return;
+                        return;
+                            
              
                 }
            
@@ -149,7 +150,7 @@ namespace Webshop2.Models
                     {
                         return; // Gå tillbaka till huvudmenyn
                     }
-                   
+
                     var product = db.Product.Find(productId);
                     if (product != null)
                     {
@@ -188,6 +189,11 @@ namespace Webshop2.Models
                 {
                     AddToShoppingCart(product);
                     Console.WriteLine($"{product.Name} har lagts till i varukorgen");
+                }
+                if (addToCartChoice == "nej")
+                {
+                    Console.Clear();
+                    Helpers.ShowAllProducts(db);
                 }
             }
             else

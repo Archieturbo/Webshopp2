@@ -71,6 +71,7 @@ namespace Webshop2
                                 Helpers.ShowAllProducts(db);
                                 Helpers.AddToShoppingCartMenu(db);
                                 Console.WriteLine("Visar alla produkter");
+                                
                                 break;
 
                             case Helpers.MenuChoice.ShowShoppingCart:
@@ -107,8 +108,5 @@ namespace Webshop2
                 }
             }
         }
-
-
-        
     }
 }

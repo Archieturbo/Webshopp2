@@ -12,8 +12,8 @@ using Webshop2.Models;
 namespace Webshop2.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20231227101741_add-migration first")]
-    partial class addmigrationfirst
+    [Migration("20240101193523_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
