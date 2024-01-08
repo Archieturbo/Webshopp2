@@ -68,7 +68,8 @@ namespace Webshop2
 
                             case Helpers.MenuChoice.ShowAllProducts:
                                 Console.Clear();
-                                Helpers.ShowAllProducts(db);
+                                Helpers.ShowAllProducts(db,"herr");
+                                //Helpers.ShowproductinCategory(db,"herr");
                                 Helpers.AddToShoppingCartMenu(db);
                                 Console.WriteLine("Visar alla produkter");
                                 

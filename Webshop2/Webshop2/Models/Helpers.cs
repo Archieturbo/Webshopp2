@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -42,6 +43,13 @@ namespace Webshop2.Models
             Exit
         }
 
+        public enum ChooseSize
+        {
+            Large = 1,
+            Medium,
+            Small,
+        }
+
         public static void ShowAllCategories(MyDbContext db)
         {
             Console.WriteLine("Alla kategorier:");
@@ -53,16 +61,30 @@ namespace Webshop2.Models
                 Console.WriteLine($"ID: {category.Id}, Kategori: {category.CategoryName}");
             }
         }
+        public static string GetCategoryNames(ICollection<Category> categories)
+        {
+            if (categories == null || categories.Count == 0)
+            {
+                return "Inga kategorier tillgängliga";
+            }
 
-        public static void ShowAllProducts(MyDbContext db)
+            var categoryNames = categories.Select(category => category.CategoryName);
+            return string.Join(", ", categoryNames);
+        }
+        public static void ShowAllProducts(MyDbContext db, string categories)
         {
             Console.WriteLine($"Alla produkter: ");
-            var products = db.Product.ToList();
+            var products = db.Product.Include(p => p.Categories).ToList();
 
             foreach (var product in products)
             {
-                Console.WriteLine($"ID: {product.Id}, {product.Name}, Pris: {product.Price}, Lager: {product.UnitsInStock}");
+                Console.WriteLine($"ID: {product.Id}, {product.Name}, " +
+                    $"Pris: {product.Price}, " +
+                    $"Lager: {product.UnitsInStock}, " +
+                    $"Kategorier: {Helpers.GetCategoryNames(product.Categories)}");
+
             }
+
             Console.WriteLine("---------------------------------");
             Console.WriteLine("1. Visa detaljer för en produkt");
             Console.WriteLine("2. Lägg till i varukorgen");
@@ -72,27 +94,27 @@ namespace Webshop2.Models
 
             if (int.TryParse(actionChoice, out int action))
             {
-               
+
                 switch (action)
                 {
                     case 1:
-                      
+
                         Console.Write("Ange ID för produkten du vill visa detaljer för: ");
                         if (int.TryParse(Console.ReadLine(), out int productId))
                         {
                             Console.Clear();
                             ShowProductDetails(db, productId);
-                           
+
                         }
-                       
+
                         else
                         {
                             Console.WriteLine("Ogiltigt ID. Ange ett numeriskt värde.");
                         }
                         break;
-                      
+
                     case 2:
- 
+
                         Console.Write("Ange ID för produkten du vill lägga till i varukorgen: ");
                         if (int.TryParse(Console.ReadLine(), out int selectedProductId))
                         {
@@ -114,10 +136,10 @@ namespace Webshop2.Models
                         break;
                     case 3:
                         return;
-                            
-             
+
+
                 }
-           
+
             }
         }
 
@@ -133,15 +155,16 @@ namespace Webshop2.Models
 
         public static void AddToShoppingCart(Product product)
         {
+
             shoppingCart.Add(product);
-           
+
         }
 
         public static void AddToShoppingCartMenu(MyDbContext db)
         {
             while (true)
             {
-                
+
                 Console.Write("Ange ID för produkten du vill lägga till i varukorgen (eller 0 för att gå tillbaka): ");
                 if (int.TryParse(Console.ReadLine(), out int productId))
                 {
@@ -154,6 +177,27 @@ namespace Webshop2.Models
                     var product = db.Product.Find(productId);
                     if (product != null)
                     {
+                        Console.Write("Välj storlek");
+
+                        Console.WriteLine("1.small");
+                        Console.WriteLine("2. Medium");
+                        Console.WriteLine("3.Large");
+                        int SizeChoose = int.Parse(Console.ReadLine());
+                        switch (SizeChoose)
+                        {
+                            case 1:
+                                AddToShoppingCart(product, ChooseSize.Small);
+                                Console.WriteLine("Small");
+                                break;
+                            case 2:
+                                Console.WriteLine("Medium");
+                                break;
+                            case 3:
+                                Console.WriteLine("Large");
+                                break;
+
+                        }
+
                         AddToShoppingCart(product);
                         Console.WriteLine("Produkten har lagts till i varukorgen.");
                     }
@@ -193,7 +237,7 @@ namespace Webshop2.Models
                 if (addToCartChoice == "nej")
                 {
                     Console.Clear();
-                    Helpers.ShowAllProducts(db);
+                    Helpers.ShowAllProducts(db, "herr");
                 }
             }
             else
