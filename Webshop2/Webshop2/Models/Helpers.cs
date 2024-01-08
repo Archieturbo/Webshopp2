@@ -121,7 +121,7 @@ namespace Webshop2.Models
                             var selectedProduct = db.Product.Find(selectedProductId);
                             if (selectedProduct != null)
                             {
-                                Helpers.AddToShoppingCart(selectedProduct);
+                                //Helpers.AddToShoppingCart(selectedProduct);
                                 Console.WriteLine("Produkten har lagts till i varukorgen.");
                             }
                             else
@@ -146,19 +146,25 @@ namespace Webshop2.Models
         public static void ShowShoppingCart()
         {
             Console.WriteLine("Varukorg:");
-            foreach (var product in shoppingCart)
-            {
-                Console.WriteLine($"{product.Name}, Pris: {product.Price}");
-            }
+            //foreach (var product in shoppingCart)
+            //{
+            //    Console.WriteLine($"{product.Name}, Pris: {product.Price}");
+            //}
             Console.WriteLine("---------------------------------");
         }
 
-        public static void AddToShoppingCart(Product product)
-        {
+        //public static void AddToShoppingCart(Product product, string size, int quantity)
+        //{
+        //    var orderDetail = new Orderdetail
+        //    {
+        //        ProductId = product.Id,
+        //        Size = size,
+        //        Quantity = quantity
+        //    //};
+        //    //shoppingCart.Add(orderDetail);
+        //    Console.WriteLine($"{product.Name} ({size}), Antal: {quantity} har lagts till i varukorgen");
+        //}
 
-            shoppingCart.Add(product);
-
-        }
 
         public static void AddToShoppingCartMenu(MyDbContext db)
         {
@@ -185,20 +191,20 @@ namespace Webshop2.Models
                         int SizeChoose = int.Parse(Console.ReadLine());
                         switch (SizeChoose)
                         {
-                            case 1:
-                                AddToShoppingCart(product, ChooseSize.Small);
-                                Console.WriteLine("Small");
-                                break;
-                            case 2:
-                                Console.WriteLine("Medium");
-                                break;
-                            case 3:
-                                Console.WriteLine("Large");
-                                break;
+                            //case 1:
+                            //    AddToShoppingCart(product, ChooseSize.Small);
+                            //    Console.WriteLine("Small");
+                            //    break;
+                            //case 2:
+                            //    Console.WriteLine("Medium");
+                            //    break;
+                            //case 3:
+                            //    Console.WriteLine("Large");
+                            //    break;
 
                         }
 
-                        AddToShoppingCart(product);
+                        //AddToShoppingCart(product);
                         Console.WriteLine("Produkten har lagts till i varukorgen.");
                     }
                     else
@@ -231,8 +237,8 @@ namespace Webshop2.Models
 
                 if (addToCartChoice == "ja")
                 {
-                    AddToShoppingCart(product);
-                    Console.WriteLine($"{product.Name} har lagts till i varukorgen");
+                    //AddToShoppingCart(product);
+                    //Console.WriteLine($"{product.Name} har lagts till i varukorgen");
                 }
                 if (addToCartChoice == "nej")
                 {

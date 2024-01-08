@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Webshop2.Models;
 
@@ -11,9 +12,11 @@ using Webshop2.Models;
 namespace Webshop2.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240108123233_size")]
+    partial class size
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -186,9 +189,6 @@ namespace Webshop2.Migrations
 
                     b.Property<double?>("Price")
                         .HasColumnType("float");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SupplierId")
                         .HasColumnType("int");
