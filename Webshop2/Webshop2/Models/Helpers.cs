@@ -115,8 +115,27 @@ namespace Webshop2.Models
                             var selectedProduct = db.Product.Find(selectedProductId);
                             if (selectedProduct != null)
                             {
-                                //Helpers.AddToShoppingCart(selectedProduct);
-                                Console.WriteLine("Produkten har lagts till i varukorgen.");
+                                Console.Write("Ange Antal: ");
+                             
+                                if (int.TryParse(Console.ReadLine(), out int quantity))
+                                {
+                                    if (selectedProduct.UnitsInStock > quantity)
+                                    {
+                                        for (int i = 0; i < quantity; i++)
+                                        {
+                                            shoppingCart.Add(selectedProduct);
+                                        }
+
+
+                                        Console.WriteLine("Produkten har lagts till i varukorgen.");
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Antalet finns inte i lager");
+                                    }
+
+                                }
+                                 
                             }
                             else
                             {
@@ -151,31 +170,23 @@ namespace Webshop2.Models
 
         public static void AddToShoppingCartMenu(Product product)
         {
-            // while (true)
-            //{
 
-            //Console.Write("Ange ID för produkten du vill lägga till i varukorgen (eller 0 för att gå tillbaka): ");
-            //if (int.TryParse(Console.ReadLine(), out int productId2))
-            //{
-            Console.Clear();
-
-            //var product = db.Product.Find(productId);
             if (product != null)
             {
-               
+
 
                 Console.Write("Ange antal: ");
-              
+
                 int quantity = int.Parse(Console.ReadLine());
                 for (int i = 0; i < quantity; i++)
                 {
                     shoppingCart.Add(product);
                 }
-                
+
                 Console.WriteLine($"{product.Name}, Antal: {quantity} har lagts till i varukorgen");
 
 
-                
+
 
             }
             //    else
@@ -213,7 +224,7 @@ namespace Webshop2.Models
                 if (addToCartChoice == "ja")
                 {
                     AddToShoppingCartMenu(product);
-                    
+
 
                 }
                 if (addToCartChoice == "nej")
