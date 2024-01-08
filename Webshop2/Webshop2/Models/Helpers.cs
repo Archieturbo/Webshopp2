@@ -43,12 +43,6 @@ namespace Webshop2.Models
             Exit
         }
 
-        public enum ChooseSize
-        {
-            Large = 1,
-            Medium,
-            Small,
-        }
 
         public static void ShowAllCategories(MyDbContext db)
         {
@@ -74,7 +68,7 @@ namespace Webshop2.Models
         public static void ShowAllProducts(MyDbContext db, string categories)
         {
             Console.WriteLine($"Alla produkter: ");
-            var products = db.Product.Include(p => p.Categories).ToList();
+            var products = db.Product.Include(p => p.Categories).ToList();//Här behöver vi koppla product/category tabellen 
 
             foreach (var product in products)
             {
@@ -146,77 +140,58 @@ namespace Webshop2.Models
         public static void ShowShoppingCart()
         {
             Console.WriteLine("Varukorg:");
-            //foreach (var product in shoppingCart)
-            //{
-            //    Console.WriteLine($"{product.Name}, Pris: {product.Price}");
-            //}
+            foreach (var product in shoppingCart)
+            {
+                Console.WriteLine($"{product.Name}, Pris: {product.Price}");
+            }
             Console.WriteLine("---------------------------------");
         }
 
-        //public static void AddToShoppingCart(Product product, string size, int quantity)
-        //{
-        //    var orderDetail = new Orderdetail
-        //    {
-        //        ProductId = product.Id,
-        //        Size = size,
-        //        Quantity = quantity
-        //    //};
-        //    //shoppingCart.Add(orderDetail);
-        //    Console.WriteLine($"{product.Name} ({size}), Antal: {quantity} har lagts till i varukorgen");
-        //}
 
 
-        public static void AddToShoppingCartMenu(MyDbContext db)
+        public static void AddToShoppingCartMenu(Product product)
         {
-            while (true)
+            // while (true)
+            //{
+
+            //Console.Write("Ange ID för produkten du vill lägga till i varukorgen (eller 0 för att gå tillbaka): ");
+            //if (int.TryParse(Console.ReadLine(), out int productId2))
+            //{
+            Console.Clear();
+
+            //var product = db.Product.Find(productId);
+            if (product != null)
             {
+               
 
-                Console.Write("Ange ID för produkten du vill lägga till i varukorgen (eller 0 för att gå tillbaka): ");
-                if (int.TryParse(Console.ReadLine(), out int productId))
+                Console.Write("Ange antal: ");
+              
+                int quantity = int.Parse(Console.ReadLine());
+                for (int i = 0; i < quantity; i++)
                 {
-                    Console.Clear();
-                    if (productId == 0)
-                    {
-                        return; // Gå tillbaka till huvudmenyn
-                    }
-
-                    var product = db.Product.Find(productId);
-                    if (product != null)
-                    {
-                        Console.Write("Välj storlek");
-
-                        Console.WriteLine("1.small");
-                        Console.WriteLine("2. Medium");
-                        Console.WriteLine("3.Large");
-                        int SizeChoose = int.Parse(Console.ReadLine());
-                        switch (SizeChoose)
-                        {
-                            //case 1:
-                            //    AddToShoppingCart(product, ChooseSize.Small);
-                            //    Console.WriteLine("Small");
-                            //    break;
-                            //case 2:
-                            //    Console.WriteLine("Medium");
-                            //    break;
-                            //case 3:
-                            //    Console.WriteLine("Large");
-                            //    break;
-
-                        }
-
-                        //AddToShoppingCart(product);
-                        Console.WriteLine("Produkten har lagts till i varukorgen.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Produkt med angivet ID hittades inte.");
-                    }
+                    shoppingCart.Add(product);
                 }
-                else
-                {
-                    Console.WriteLine("Ogiltigt ID. Ange ett numeriskt värde.");
-                }
+                
+                Console.WriteLine($"{product.Name}, Antal: {quantity} har lagts till i varukorgen");
+
+
+                
+
             }
+            //    else
+            //    {
+            //        Console.WriteLine("Produkt med angivet ID hittades inte.");
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Ogiltigt ID. Ange ett numeriskt värde.");
+            //}
+
+            //  }
+
+
+
         }
 
         public static void ShowProductDetails(MyDbContext db, int productId)
@@ -237,8 +212,9 @@ namespace Webshop2.Models
 
                 if (addToCartChoice == "ja")
                 {
-                    //AddToShoppingCart(product);
-                    //Console.WriteLine($"{product.Name} har lagts till i varukorgen");
+                    AddToShoppingCartMenu(product);
+                    
+
                 }
                 if (addToCartChoice == "nej")
                 {

@@ -70,7 +70,7 @@ namespace Webshop2
                                 Console.Clear();
                                 Helpers.ShowAllProducts(db,"herr");
                                 //Helpers.ShowproductinCategory(db,"herr");
-                                Helpers.AddToShoppingCartMenu(db);
+                                //Helpers.AddToShoppingCartMenu(db);
                                 Console.WriteLine("Visar alla produkter");
                                 
                                 break;
