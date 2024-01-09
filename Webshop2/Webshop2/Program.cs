@@ -48,6 +48,8 @@ namespace Webshop2
                     Console.WriteLine($"{(int)Helpers.MenuChoice.ShowAllCategories}. Visa alla kategorier");
                     Console.WriteLine($"{(int)Helpers.MenuChoice.ShowAllProducts}. Visa alla produkter");
                     Console.WriteLine($"{(int)Helpers.MenuChoice.ShowShoppingCart}. Visa varukorg");
+                    Console.WriteLine($"{(int)Helpers.MenuChoice.UpdateQuantity}. Ändra antal i varukorgen");
+                    Console.WriteLine($"{(int)Helpers.MenuChoice.RemoveFromCart}. Ta bort produkt från varukorgen");
                     Console.WriteLine($"{(int)Helpers.MenuChoice.Search}. Sök");
                     Console.WriteLine($"{(int)Helpers.MenuChoice.Pay}. Betala");
                     Console.WriteLine($"{(int)Helpers.MenuChoice.Exit}. Avsluta");
@@ -71,13 +73,13 @@ namespace Webshop2
                                 Helpers.ShowAllProducts(db,"herr");
                                 //Helpers.ShowproductinCategory(db,"herr");
                                 //Helpers.AddToShoppingCartMenu(db);
-                                Console.WriteLine("Visar alla produkter");
+                                //Console.WriteLine("Visar alla produkter");
                                 
                                 break;
 
                             case Helpers.MenuChoice.ShowShoppingCart:
                                 Console.Clear();
-                                Helpers.ShowShoppingCart();
+                                Shoppingcart.ShowShoppingCart();
                                 Console.WriteLine("Visar varukorgen");
                                 break;
                             case Helpers.MenuChoice.Search:
@@ -86,6 +88,14 @@ namespace Webshop2
                                 string searchTerm = Console.ReadLine();
                                 Helpers.SearchProducts(db, searchTerm);
                                 Console.WriteLine($"Sökresultat för : {searchTerm}");
+                                break;
+                            case Helpers.MenuChoice.UpdateQuantity:
+                                Console.Clear();
+                                Shoppingcart.UpdateQuantityInShoppingCart();
+                                break;
+                            case Helpers.MenuChoice.RemoveFromCart:
+                                Console.Clear();
+                                Shoppingcart.RemoveFromShoppingCart();
                                 break;
 
                             case Helpers.MenuChoice.Pay:

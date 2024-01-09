@@ -7,7 +7,6 @@ namespace Webshop2.Models
 {
     public class Helpers
     {
-        private static List<Product> shoppingCart = new List<Product>();
 
         public static void DisplayMenu()
         {
@@ -38,8 +37,10 @@ namespace Webshop2.Models
             ShowAllCategories = 1,
             ShowAllProducts,
             ShowShoppingCart,
-            Pay,
+            UpdateQuantity,
+            RemoveFromCart,
             Search,
+            Pay,
             Exit
         }
 
@@ -116,14 +117,14 @@ namespace Webshop2.Models
                             if (selectedProduct != null)
                             {
                                 Console.Write("Ange Antal: ");
-                             
+
                                 if (int.TryParse(Console.ReadLine(), out int quantity))
                                 {
                                     if (selectedProduct.UnitsInStock > quantity)
                                     {
                                         for (int i = 0; i < quantity; i++)
                                         {
-                                            shoppingCart.Add(selectedProduct);
+                                            Shoppingcart.shoppingCart.Add(selectedProduct);
                                         }
 
 
@@ -132,10 +133,11 @@ namespace Webshop2.Models
                                     else
                                     {
                                         Console.WriteLine("Antalet finns inte i lager");
+
                                     }
 
                                 }
-                                 
+
                             }
                             else
                             {
@@ -148,7 +150,8 @@ namespace Webshop2.Models
                         }
                         break;
                     case 3:
-                        return;
+                        Console.Clear();
+                        break;
 
 
                 }
@@ -156,54 +159,6 @@ namespace Webshop2.Models
             }
         }
 
-        public static void ShowShoppingCart()
-        {
-            Console.WriteLine("Varukorg:");
-            foreach (var product in shoppingCart)
-            {
-                Console.WriteLine($"{product.Name}, Pris: {product.Price}");
-            }
-            Console.WriteLine("---------------------------------");
-        }
-
-
-
-        public static void AddToShoppingCartMenu(Product product)
-        {
-
-            if (product != null)
-            {
-
-
-                Console.Write("Ange antal: ");
-
-                int quantity = int.Parse(Console.ReadLine());
-                for (int i = 0; i < quantity; i++)
-                {
-                    shoppingCart.Add(product);
-                }
-
-                Console.WriteLine($"{product.Name}, Antal: {quantity} har lagts till i varukorgen");
-
-
-
-
-            }
-            //    else
-            //    {
-            //        Console.WriteLine("Produkt med angivet ID hittades inte.");
-            //    }
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Ogiltigt ID. Ange ett numeriskt värde.");
-            //}
-
-            //  }
-
-
-
-        }
 
         public static void ShowProductDetails(MyDbContext db, int productId)
         {
@@ -223,7 +178,7 @@ namespace Webshop2.Models
 
                 if (addToCartChoice == "ja")
                 {
-                    AddToShoppingCartMenu(product);
+                    Shoppingcart.AddToShoppingCartMenu(product);
 
 
                 }
@@ -254,11 +209,10 @@ namespace Webshop2.Models
                 Console.WriteLine($"Beskrivning: {product.Description}");
             }
         }
+
+
     }
 }
-
-
-
 
 
 
