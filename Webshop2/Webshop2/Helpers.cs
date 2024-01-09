@@ -2,12 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Webshop2.Models;
 
-namespace Webshop2.Models
+namespace Webshop2
 {
-    public class Helpers
+    internal class Helpers
     {
-        private static List<Product> shoppingCart = new List<Product>();
+        public static List<Product> shoppingCart = new List<Product>();
 
         public static void DisplayMenu()
         {
@@ -116,7 +119,7 @@ namespace Webshop2.Models
                             if (selectedProduct != null)
                             {
                                 Console.Write("Ange Antal: ");
-                             
+
                                 if (int.TryParse(Console.ReadLine(), out int quantity))
                                 {
                                     if (selectedProduct.UnitsInStock > quantity)
@@ -135,7 +138,7 @@ namespace Webshop2.Models
                                     }
 
                                 }
-                                 
+
                             }
                             else
                             {
@@ -155,56 +158,6 @@ namespace Webshop2.Models
 
             }
         }
-
-        public static void ShowShoppingCart()
-        {
-            Console.WriteLine("Varukorg:");
-            foreach (var product in shoppingCart)
-            {
-                Console.WriteLine($"{product.Name}, Pris: {product.Price}");
-            }
-            Console.WriteLine("---------------------------------");
-        }
-
-
-
-        public static void AddToShoppingCartMenu(Product product)
-        {
-
-            if (product != null)
-            {
-
-
-                Console.Write("Ange antal: ");
-
-                int quantity = int.Parse(Console.ReadLine());
-                for (int i = 0; i < quantity; i++)
-                {
-                    shoppingCart.Add(product);
-                }
-
-                Console.WriteLine($"{product.Name}, Antal: {quantity} har lagts till i varukorgen");
-
-
-
-
-            }
-            //    else
-            //    {
-            //        Console.WriteLine("Produkt med angivet ID hittades inte.");
-            //    }
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Ogiltigt ID. Ange ett numeriskt värde.");
-            //}
-
-            //  }
-
-
-
-        }
-
         public static void ShowProductDetails(MyDbContext db, int productId)
         {
             var product = db.Product.Find(productId);
@@ -223,14 +176,14 @@ namespace Webshop2.Models
 
                 if (addToCartChoice == "ja")
                 {
-                    AddToShoppingCartMenu(product);
+                  Shoppingcart.AddToShoppingCartMenu(product);
 
 
                 }
                 if (addToCartChoice == "nej")
                 {
                     Console.Clear();
-                    Helpers.ShowAllProducts(db, "herr");
+                    Helpers.ShowAllProducts(db, "");
                 }
             }
             else
@@ -463,5 +416,3 @@ namespace Webshop2.Models
 //db.AddRange(product1, product2, product3, product4, product5, product6, product7, product8, product9, product10,
 //             product11, product12, product13, product14, product15);
 //            db.SaveChanges();
-
-

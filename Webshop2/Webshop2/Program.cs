@@ -68,16 +68,14 @@ namespace Webshop2
 
                             case Helpers.MenuChoice.ShowAllProducts:
                                 Console.Clear();
-                                Helpers.ShowAllProducts(db,"herr");
-                                //Helpers.ShowproductinCategory(db,"herr");
-                                //Helpers.AddToShoppingCartMenu(db);
+                                Helpers.ShowAllProducts(db,"");                             
                                 Console.WriteLine("Visar alla produkter");
                                 
                                 break;
 
                             case Helpers.MenuChoice.ShowShoppingCart:
                                 Console.Clear();
-                                Helpers.ShowShoppingCart();
+                                Shoppingcart.ShowShoppingCart();
                                 Console.WriteLine("Visar varukorgen");
                                 break;
                             case Helpers.MenuChoice.Search:
