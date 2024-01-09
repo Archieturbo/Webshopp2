@@ -2,15 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Webshop2.Models;
 
-namespace Webshop2
+namespace Webshop2.Models
 {
-    internal class Helpers
+    public class Helpers
     {
-        public static List<Product> shoppingCart = new List<Product>();
 
         public static void DisplayMenu()
         {
@@ -41,8 +37,10 @@ namespace Webshop2
             ShowAllCategories = 1,
             ShowAllProducts,
             ShowShoppingCart,
-            Pay,
+            UpdateQuantity,
+            RemoveFromCart,
             Search,
+            Pay,
             Exit
         }
 
@@ -126,7 +124,7 @@ namespace Webshop2
                                     {
                                         for (int i = 0; i < quantity; i++)
                                         {
-                                            shoppingCart.Add(selectedProduct);
+                                            Shoppingcart.shoppingCart.Add(selectedProduct);
                                         }
 
 
@@ -135,6 +133,7 @@ namespace Webshop2
                                     else
                                     {
                                         Console.WriteLine("Antalet finns inte i lager");
+
                                     }
 
                                 }
@@ -151,13 +150,16 @@ namespace Webshop2
                         }
                         break;
                     case 3:
-                        return;
+                        Console.Clear();
+                        break;
 
 
                 }
 
             }
         }
+
+
         public static void ShowProductDetails(MyDbContext db, int productId)
         {
             var product = db.Product.Find(productId);
@@ -176,14 +178,14 @@ namespace Webshop2
 
                 if (addToCartChoice == "ja")
                 {
-                  Shoppingcart.AddToShoppingCartMenu(product);
+                    Shoppingcart.AddToShoppingCartMenu(product);
 
 
                 }
                 if (addToCartChoice == "nej")
                 {
                     Console.Clear();
-                    Helpers.ShowAllProducts(db, "");
+                    Helpers.ShowAllProducts(db, "herr");
                 }
             }
             else
@@ -207,11 +209,10 @@ namespace Webshop2
                 Console.WriteLine($"Beskrivning: {product.Description}");
             }
         }
+
+
     }
 }
-
-
-
 
 
 
@@ -416,3 +417,5 @@ namespace Webshop2
 //db.AddRange(product1, product2, product3, product4, product5, product6, product7, product8, product9, product10,
 //             product11, product12, product13, product14, product15);
 //            db.SaveChanges();
+
+
