@@ -16,7 +16,7 @@ namespace Webshop2.Models
         public int? Quantity { get; set; }
 
         public int? DeliveryID { get; set; }
-
+        public decimal? Price { get; set; }
         public Order? Order { get; set; }
         public Product? Product { get; set; }
 

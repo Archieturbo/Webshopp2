@@ -40,7 +40,7 @@ namespace Webshop2
             {
                 foreach (var product in shoppingCart)
                 {
-                    Console.WriteLine($"{product.Name}, Pris: {product.Price:C}");
+                    Console.WriteLine($"{product.Id}, {product.Name}, Pris: {product.Price:C}");
                 }
             }
             else
@@ -55,37 +55,44 @@ namespace Webshop2
 
         public static void UpdateQuantityInShoppingCart()
         {
-            Console.Write("Ange namnet på produkten du vill ändra antal för: ");
-            string productName = Console.ReadLine();
-
-            var productToUpdate = shoppingCart.FirstOrDefault(p => p.Name.Equals(productName, StringComparison.OrdinalIgnoreCase));
-
-            if (productToUpdate != null)
+            ShowShoppingCart();
+            Console.Write("Ange ID på produkten du vill ändra antal för: ");
+            if (int.TryParse(Console.ReadLine(), out int productId))
             {
-                Console.Write("Ange det nya antalet: ");
-                if (int.TryParse(Console.ReadLine(), out int newQuantity))
+                var productToUpdate = shoppingCart.FirstOrDefault(p => p.Id == productId);
+
+                if (productToUpdate != null)
                 {
-                    // Ta bort de befintliga produkterna från varukorgen
-                    shoppingCart.RemoveAll(p => p.Name.Equals(productName, StringComparison.OrdinalIgnoreCase));
-
-                    // Lägg till de nya produkterna i varukorgen
-                    for (int i = 0; i < newQuantity; i++)
+                    Console.Write("Ange det nya antalet: ");
+                    if (int.TryParse(Console.ReadLine(), out int newQuantity))
                     {
-                        shoppingCart.Add(productToUpdate);
-                    }
+                        // Ta bort de befintliga produkterna från varukorgen
+                        shoppingCart.RemoveAll(p => p.Id == productId);
 
-                    Console.WriteLine("Antalet har uppdaterats i varukorgen.");
+                        // Lägg till de nya produkterna i varukorgen
+                        for (int i = 0; i < newQuantity; i++)
+                        {
+                            shoppingCart.Add(productToUpdate);
+                        }
+
+                        Console.WriteLine("Antalet har uppdaterats i varukorgen.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ogiltigt antal. Försök igen.");
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("Ogiltigt antal. Försök igen.");
+                    Console.WriteLine("Produkten hittades inte i varukorgen.");
                 }
             }
             else
             {
-                Console.WriteLine("Produkten hittades inte i varukorgen.");
+                Console.WriteLine("Ogiltigt ID. Ange ett numeriskt värde.");
             }
         }
+
 
 
         public static void RemoveFromShoppingCart()
