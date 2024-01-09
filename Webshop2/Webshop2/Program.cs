@@ -121,11 +121,14 @@ namespace Webshop2
                         Console.WriteLine("Ogiltigt val. Försök igen.");
                     }
                 }
-
-
-
-
             }
         }
     }
 }
+
+    //Problem som måste lösas!
+    //1. Koppla rätt databaser mellan varandra Även fast man lägger i varukorgen så är antalet detsamma. 
+    //2. Behöver ändra så det står id när man tar bort id istället för att skriva namnet på plagget
+    //3. Kolla igenom frakt view delen för den länkas inte på rätt sätt
+    //4. Betala view funkar inte än.
+    //5. Hela admindelen är kvar 
