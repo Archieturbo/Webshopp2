@@ -177,6 +177,9 @@ namespace Webshop2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 

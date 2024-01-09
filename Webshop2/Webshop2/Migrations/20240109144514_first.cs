@@ -111,7 +111,8 @@ namespace Webshop2.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     SupplierId = table.Column<int>(type: "int", nullable: true),
                     UnitsInStock = table.Column<int>(type: "int", nullable: true),
-                    Price = table.Column<double>(type: "float", nullable: true)
+                    Price = table.Column<double>(type: "float", nullable: true),
+                    CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

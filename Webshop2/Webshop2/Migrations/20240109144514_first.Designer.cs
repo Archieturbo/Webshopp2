@@ -12,7 +12,7 @@ using Webshop2.Models;
 namespace Webshop2.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20240109133214_first")]
+    [Migration("20240109144514_first")]
     partial class first
     {
         /// <inheritdoc />
@@ -179,6 +179,9 @@ namespace Webshop2.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");

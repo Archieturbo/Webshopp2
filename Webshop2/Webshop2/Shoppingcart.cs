@@ -97,27 +97,40 @@ namespace Webshop2
 
         public static void RemoveFromShoppingCart()
         {
-            Console.Write("Ange namnet på en produkt du vill ta bort från varukorgen: ");
-            string productName = Console.ReadLine();
-
-            var productToRemove = shoppingCart.FirstOrDefault(p => p.Name.Equals(productName, StringComparison.OrdinalIgnoreCase));
-
-            if (productToRemove != null)
+            ShowShoppingCart();
+            Console.Write("Ange ID på produkten du vill ta bort från varukorgen: ");
+            if (int.TryParse(Console.ReadLine(), out int productId))
             {
-                shoppingCart.Remove(productToRemove);
-                Console.WriteLine("Produkten har tagits bort från varukorgen.");
+                var productToRemove = shoppingCart.FirstOrDefault(p => p.Id == productId);
+
+                if (productToRemove != null)
+                {
+                    shoppingCart.Remove(productToRemove);
+                    Console.WriteLine("Produkten har tagits bort från varukorgen.");
+                }
+                else
+                {
+                    Console.WriteLine("Produkten hittades inte i varukorgen.");
+                }
             }
             else
             {
-                Console.WriteLine("Produkten hittades inte i varukorgen.");
+                Console.WriteLine("Ogiltigt ID. Ange ett numeriskt värde.");
             }
         }
-
         private static decimal CalculateTotalPrice()
         {
+            decimal total = 0.0m;
 
-            return (decimal)(shoppingCart.Sum(p => p.Price) ?? 0.0);
+            if (shoppingCart.Sum(p => p.Price) != null)
+            {
+                total = (decimal)shoppingCart.Sum(p => p.Price);
+            }
+
+            return total;
+
         }
-
     }
+
+    
 }
