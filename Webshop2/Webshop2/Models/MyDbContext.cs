@@ -12,7 +12,6 @@ namespace Webshop2.Models
         public DbSet<Supplier> Supplier { get; set; }
         
         public DbSet<Category> Category { get; set; }
-         
         public DbSet<Product> Product { get; set; }
 
         public DbSet<Orderdetail> Orderdetail { get; set; }

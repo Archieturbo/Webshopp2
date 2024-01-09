@@ -70,24 +70,24 @@ namespace Webshop2.Models
 
             var category = db.Category.FirstOrDefault(c => c.Id == categoryId);
 
-            if (category != null)
-            {
-                Console.WriteLine($"Produkter i kategorin: {category.CategoryName}");
+            //if (category != null)
+            //{
+            //    Console.WriteLine($"Produkter i kategorin: {category.CategoryName}");
 
-                var productsInCategory = db.CategoryProduct
-                    .Where(cp => cp.CategoryId == categoryId)
-                    .Select(cp => cp.Product)
-                    .ToList();
+            //    var productsInCategory = db.CategoryProduct
+            //        .Where(cp => cp.CategoryId == categoryId)
+            //        .Select(cp => cp.Product)
+            //        .ToList();
 
-                foreach (var product in productsInCategory)
-                {
-                    Console.WriteLine($"ID: {product.Id}, Produkt: {product.ProductName}, Pris: {product.Price:C}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Ogiltig kategori. Försök igen.");
-            }
+            //    foreach (var product in productsInCategory)
+            //    {
+            //        Console.WriteLine($"ID: {product.Id}, Produkt: {product.ProductName}, Pris: {product.Price:C}");
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Ogiltig kategori. Försök igen.");
+            //}
 
         }
 

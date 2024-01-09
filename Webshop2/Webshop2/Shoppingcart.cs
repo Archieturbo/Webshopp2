@@ -118,7 +118,7 @@ namespace Webshop2
                 Console.WriteLine("Ogiltigt ID. Ange ett numeriskt värde.");
             }
         }
-        private static decimal CalculateTotalPrice()
+        public static decimal CalculateTotalPrice()
         {
             decimal total = 0.0m;
 
