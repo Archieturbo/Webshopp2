@@ -69,6 +69,7 @@ namespace Webshop2
                     {
                         Name = customerName,
                         Country = customerCountry,
+                        Adress = customerAddress,
                         City = customerCity,
                         Birthday = DateTime.Parse(customerBirthday),
                         Phone = customerPhone.ToString(),
