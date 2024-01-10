@@ -27,10 +27,10 @@ namespace Webshop2
 
             var popularItems = new[]
             {
-            new { Name = "T-shirt", Price = 452.78, Category = "Herr" },
-            new { Name = "Nike Hoodie", Price = 845.56, Category = "Herr" },
-            new { Name = "Jeans", Price = 1025.89, Category = "Dam" },
-        };
+                new { Name = "T-shirt", Price = 452.78, Category = "Herr" },
+                new { Name = "Nike Hoodie", Price = 845.56, Category = "Herr" },
+                new { Name = "Jeans", Price = 1025.89, Category = "Dam" },
+            };
 
             foreach (var item in popularItems)
             {
@@ -99,9 +99,11 @@ namespace Webshop2
 
                         case Helpers.MenuChoice.Pay:
                             Console.Clear();
-                            shippment.FraktView();
+                            Customer customerinfo = shippment.GetCustomerInfo();
+                            decimal shippingprice = shippment.SelectShippingMethod();
+                            shippment.PlaceOrder(customerinfo, shippingprice);
                             decimal totalAmount = Shoppingcart.CalculateTotalPrice();
-                            Payment.ProcessPayment(shoppingCart,totalAmount,db);
+                            Payment.ProcessPayment(shoppingCart, totalAmount, db);
                             break;
 
                         case Helpers.MenuChoice.Exit:
@@ -118,9 +120,15 @@ namespace Webshop2
                     Console.WriteLine("Ogiltigt val. Försök igen.");
                 }
             }
+
+
         }
+
     }
 }
+        
+    
+
 
 
 

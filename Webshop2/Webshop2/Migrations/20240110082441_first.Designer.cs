@@ -12,7 +12,7 @@ using Webshop2.Models;
 namespace Webshop2.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20240109144514_first")]
+    [Migration("20240110082441_first")]
     partial class first
     {
         /// <inheritdoc />
