@@ -60,37 +60,48 @@ namespace Webshop2.Models
             Console.WriteLine("Välj en kategori för att visa produkter (tryck 0 för att gå tillbaka):");
             if (int.TryParse(Console.ReadLine(), out int selectedCategoryId) && selectedCategoryId > 0)
             {
-                //gör en switch sats här med Linq eller lambda uttryck
+                // Anropa ShowProductsInCategory med vald kategori
                 ShowProductsInCategory(db, selectedCategoryId);
             }
         }
 
         public static void ShowProductsInCategory(MyDbContext db, int categoryId)
         {
+            var category = db.Category
+                .Include(c => c.Products) 
+                .FirstOrDefault(c => c.Id == categoryId);
+
+            if (category != null)
+            {
+                Console.WriteLine($"Produkter i kategorin: {category.CategoryName}");
+
+               
+                // Använd en switch för att visa produkter baserat på kategori
+                foreach (var product in category.Products)
+                {
+                    switch (category.CategoryName)
+                    {
+                        case "Herr":
+                            Console.WriteLine($"Herr - ID: {product.Id}, Produkt: {product.Name}, Pris: {product.Price:C}");
+                            break;
+
+                        case "Dam":
+                            Console.WriteLine($"Dam - ID: {product.Id}, Produkt: {product.Name}, Pris: {product.Price:C}");
+                            break;
 
 
-            var category = db.Category.FirstOrDefault(c => c.Id == categoryId);
-
-            //if (category != null)
-            //{
-            //    Console.WriteLine($"Produkter i kategorin: {category.CategoryName}");
-
-            //    var productsInCategory = db.CategoryProduct
-            //        .Where(cp => cp.CategoryId == categoryId)
-            //        .Select(cp => cp.Product)
-            //        .ToList();
-
-            //    foreach (var product in productsInCategory)
-            //    {
-            //        Console.WriteLine($"ID: {product.Id}, Produkt: {product.ProductName}, Pris: {product.Price:C}");
-            //    }
-            //}
-            //else
-            //{
-            //    Console.WriteLine("Ogiltig kategori. Försök igen.");
-            //}
-
+                        default:
+                            Console.WriteLine($"Junior - ID: {product.Id}, Produkt: {product.Name}, Pris: {product.Price:C}");
+                            break;
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ogiltig kategori. Försök igen.");
+            }
         }
+
 
         public static string GetCategoryNames(ICollection<Category> categories)
         {
