@@ -66,10 +66,10 @@ namespace Webshop2
                     Console.Write("Ange det nya antalet: ");
                     if (int.TryParse(Console.ReadLine(), out int newQuantity))
                     {
-                        // Ta bort de befintliga produkterna från varukorgen
+                        // Tar bort de befintliga produkterna från varukorgen
                         shoppingCart.RemoveAll(p => p.Id == productId);
 
-                        // Lägg till de nya produkterna i varukorgen
+                        // Lägger till de nya produkterna i varukorgen
                         for (int i = 0; i < newQuantity; i++)
                         {
                             shoppingCart.Add(productToUpdate);

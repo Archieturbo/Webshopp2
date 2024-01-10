@@ -52,7 +52,7 @@ namespace Webshop2
             }
 
             db.SaveChanges();
-            Console.WriteLine("Produkterna har tagits bort från databasen.");
+
         }
 
 

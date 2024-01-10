@@ -60,7 +60,7 @@ namespace Webshop2.Models
             Console.WriteLine("Välj en kategori för att visa produkter (tryck 0 för att gå tillbaka):");
             if (int.TryParse(Console.ReadLine(), out int selectedCategoryId) && selectedCategoryId > 0)
             {
-                // Anropa ShowProductsInCategory med vald kategori
+
                 ShowProductsInCategory(db, selectedCategoryId);
             }
         }
@@ -76,7 +76,7 @@ namespace Webshop2.Models
                 Console.WriteLine($"Produkter i kategorin: {category.CategoryName}");
 
 
-                // Använd en switch för att visa produkter baserat på kategori
+                // Använder en switch för att visa produkter baserat på kategori
                 foreach (var product in category.Products)
                 {
                     switch (category.CategoryName)
@@ -101,55 +101,7 @@ namespace Webshop2.Models
                 Console.WriteLine("Ogiltig kategori. Försök igen.");
             }
         }
-        //public static void ShowAllCategories(MyDbContext db)
-        //{
-        //    Console.WriteLine("Alla kategorier:");
-
-        //    var categories = db.Category.ToList();
-
-        //    foreach (var category in categories)
-        //    {
-        //        Console.WriteLine($"ID: {category.Id}, Kategori: {category.CategoryName}");
-        //    }
-
-        //    Console.WriteLine("Välj en kategori för att visa produkter (tryck 0 för att gå tillbaka):");
-        //    if (int.TryParse(Console.ReadLine(), out int selectedCategoryId) && selectedCategoryId > 0)
-        //    {
-        //        //gör en switch sats här med Linq eller lambda uttryck
-
-        //    }
-
-        //}
-
-
-        //}
-
-        //public static void ShowProductsInCategory(MyDbContext db, int categoryId)
-        //{
-
-
-        //    var category = db.Category.FirstOrDefault(c => c.Id == categoryId);
-
-        //    //if (category != null)
-        //    //{
-        //    //    Console.WriteLine($"Produkter i kategorin: {category.CategoryName}");
-
-        //    //    var productsInCategory = db.CategoryProduct
-        //    //        .Where(cp => cp.CategoryId == categoryId)
-        //    //        .Select(cp => cp.Product)
-        //    //        .ToList();
-
-        //    //    foreach (var product in productsInCategory)
-        //    //    {
-        //    //        Console.WriteLine($"ID: {product.Id}, Produkt: {product.ProductName}, Pris: {product.Price:C}");
-        //    //    }
-        //    //}
-        //    //else
-        //    //{
-        //    //    Console.WriteLine("Ogiltig kategori. Försök igen.");
-        //    //}
-
-        //}
+       
 
         public static string GetCategoryNames(ICollection<Category> categories)
         {
@@ -164,7 +116,7 @@ namespace Webshop2.Models
         public static void ShowAllProducts(MyDbContext db, string categories)
         {
             Console.WriteLine($"Alla produkter: ");
-            var products = db.Product.Include(p => p.Categories).ToList();//Här behöver vi koppla product/category tabellen 
+            var products = db.Product.Include(p => p.Categories).ToList();
 
             foreach (var product in products)
             {
@@ -176,86 +128,7 @@ namespace Webshop2.Models
             }
             ShowProductMenu(db);
             Console.WriteLine("---------------------------------");
-            //    Console.WriteLine("1. Visa detaljer för en produkt");
-            //    Console.WriteLine("2. Lägg till i varukorgen");
-            //    Console.WriteLine("3. Tillbaka till huvudmenyn");
-            //    Console.Write("Ange ditt val: ");
-            //    string actionChoice = Console.ReadLine();
-
-            //    if (int.TryParse(actionChoice, out int action))
-            //    {
-
-            //        switch (action)
-            //        {
-            //            case 1:
-
-            //                Console.Write("Ange ID för produkten du vill visa detaljer för: ");
-            //                if (int.TryParse(Console.ReadLine(), out int productId))
-            //                {
-            //                    Console.Clear();
-            //                    ShowProductDetails(db, productId);
-
-            //                }
-
-            //                else
-            //                {
-            //                    Console.WriteLine("Ogiltigt ID. Ange ett numeriskt värde.");
-            //                }
-            //                break;
-
-            //            case 2:
-
-            //                Console.Write("Ange ID för produkten du vill lägga till i varukorgen: ");
-            //                if (int.TryParse(Console.ReadLine(), out int selectedProductId))
-            //                {
-            //                    var selectedProduct = db.Product.Find(selectedProductId);
-            //                    if (selectedProduct != null)
-            //                    {
-            //                        Console.Write("Ange Antal: ");
-
-            //                        if (int.TryParse(Console.ReadLine(), out int quantity))
-            //                        {
-            //                            if (selectedProduct.UnitsInStock > quantity)
-            //                            {
-
-            //                                selectedProduct.UnitsInStock -= quantity;
-            //                                db.SaveChanges();
-
-            //                                for (int i = 0; i < quantity; i++)
-            //                                {
-            //                                    Shoppingcart.shoppingCart.Add(selectedProduct);
-            //                                }
-
-
-            //                                Console.WriteLine("Produkten har lagts till i varukorgen.");
-            //                            }
-            //                            else
-            //                            {
-            //                                Console.WriteLine("Antalet finns inte i lager");
-
-            //                            }
-
-            //                        }
-
-            //                    }
-            //                    else
-            //                    {
-            //                        Console.WriteLine("Produkt med angivet ID hittades inte.");
-            //                    }
-            //                }
-            //                else
-            //                {
-            //                    Console.WriteLine("Ogiltigt ID. Ange ett numeriskt värde.");
-            //                }
-            //                break;
-            //            case 3:
-            //                Console.Clear();
-            //                break;
-
-
-            //        }
-
-            //    }
+            
         }
 
 
