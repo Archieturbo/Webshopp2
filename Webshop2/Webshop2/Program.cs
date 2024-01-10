@@ -27,10 +27,10 @@ namespace Webshop2
 
             var popularItems = new[]
             {
-                new { Name = "T-shirt", Price = 452.78, Category = "Herr" },
-                new { Name = "Nike Hoodie", Price = 845.56, Category = "Herr" },
-                new { Name = "Jeans", Price = 1025.89, Category = "Dam" },
-            };
+                    new { Name = "T-shirt", Price = 452.78, Category = "Herr" },
+                    new { Name = "Nike Hoodie", Price = 845.56, Category = "Herr" },
+                    new { Name = "Jeans", Price = 1025.89, Category = "Dam" },
+                };
 
             foreach (var item in popularItems)
             {
@@ -65,12 +65,12 @@ namespace Webshop2
                         case Helpers.MenuChoice.ShowAllCategories:
                             Console.Clear();
                             Helpers.ShowAllCategories(db);
-                            Console.WriteLine("Visar alla kategorier");
+                            Helpers.ShowProductMenu(db);
                             break;
 
                         case Helpers.MenuChoice.ShowAllProducts:
                             Console.Clear();
-                            Helpers.ShowAllProducts(db, "herr");
+                            Helpers.ShowAllProducts(db, "");
                             break;
 
                         case Helpers.MenuChoice.ShowShoppingCart:
@@ -124,10 +124,25 @@ namespace Webshop2
 
 
         }
-
     }
 }
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Problem som måste lösas!
+///5. Hela admindelen är kvar 
+
+    
     
 
 
