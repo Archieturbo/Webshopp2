@@ -23,7 +23,7 @@ namespace Webshop2
                 // Utför betalning baserat på vald metod
                 ProcessChosenPaymentMethod(paymentMethod);
 
-                Console.WriteLine("Totalpriset är: " + totalAmount + Shoppingcart.CalculateTotalPrice());
+                //Console.WriteLine("Totalpriset är: " + totalAmount);
                 
 
                 // Ta bort produkterna från databasen efter betalning

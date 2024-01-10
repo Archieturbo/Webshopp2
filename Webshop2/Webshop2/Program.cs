@@ -100,8 +100,9 @@ namespace Webshop2
                         case Helpers.MenuChoice.Pay:
                             Console.Clear();
                             Customer customerinfo = shippment.GetCustomerInfo();
-                            decimal shippingprice = shippment.SelectShippingMethod();
-                            shippment.PlaceOrder(customerinfo, shippingprice);
+                            //Double? shippingprice = shippment.SelectShippingMethod().Price;
+                            Delivery delivery = shippment.SelectShippingMethod();
+                            shippment.PlaceOrder(customerinfo, delivery.Price, delivery);
                             decimal totalAmount = Shoppingcart.CalculateTotalPrice();
                             Payment.ProcessPayment(shoppingCart, totalAmount, db);
                             break;

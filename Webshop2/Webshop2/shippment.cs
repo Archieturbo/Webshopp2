@@ -11,7 +11,7 @@ namespace Webshop2
     {
         public static Customer GetCustomerInfo()
         {
-           
+
 
             Console.WriteLine("Fyll i leveransinformation:");
 
@@ -38,7 +38,7 @@ namespace Webshop2
 
 
 
-           return  new Customer
+            return new Customer
             {
                 Name = customerName,
                 Country = customerCountry,
@@ -50,36 +50,54 @@ namespace Webshop2
             };
         }
 
-        public static decimal SelectShippingMethod()
+        public static Delivery SelectShippingMethod()
         {
             Console.WriteLine("välj leverans metod:");
             Console.WriteLine("1. Postnord - 50 SEK");
             Console.WriteLine("2. DHL - 100 SEK");
 
             Console.Write("Enter your choice: ");
-            if (int.TryParse(Console.ReadLine(), out int shippingChoice))
+            using (var db = new MyDbContext())
             {
-                switch (shippingChoice)
+
+
+                if (int.TryParse(Console.ReadLine(), out int shippingChoice))
+
+
                 {
-                    case 1:
-                        return 50.0m;
 
-                    case 2:
-                        return 100.0m;
 
-                    default:
-                        Console.WriteLine("Invalid choice. Postnord selected.");
-                        return 50.0m;
+                    switch (shippingChoice)
+                    {
+                        case 1:
+                            var Delivery1 = (from c in db.Delivery where c.Id == 1 select c).SingleOrDefault();
+                            return Delivery1;
+
+                        case 2:
+                            var Delivery2 = (from c in db.Delivery where c.Id == 2 select c).SingleOrDefault();
+                            return Delivery2;
+
+                        default:
+                            Console.WriteLine("Invalid choice. Postnord selected.");
+                            var Delivery3 = (from c in db.Delivery where c.Id == 1 select c).SingleOrDefault();
+                            return Delivery3;
+                    }
+
+
+
                 }
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice. Postnord selected.");
-                return 50.0m;
+                else
+                {
+                    Console.WriteLine("Invalid choice. Postnord selected.");
+                    var Delivery4 = (from c in db.Delivery where c.Id == 1 select c).SingleOrDefault();
+                    return Delivery4;
+                }
             }
         }
 
-        public static void PlaceOrder(Customer customer, decimal shippingPrice)
+
+
+        public static void PlaceOrder(Customer customer, double? shippingPrice, Delivery delivery)
         {
             using (var db = new MyDbContext())
             {
@@ -88,17 +106,20 @@ namespace Webshop2
 
                 var shoppingCart = Shoppingcart.shoppingCart;
 
+
                 var newOrder = new Order
                 {
+                    DeliveryId = delivery.Id,
                     CustomerId = customer.Id,
                     OrderDate = DateTime.Now,
                     Shipaddress = customer.Adress,
-                   
+
 
                     Orderdetails = shoppingCart.Select(product => new Orderdetail
                     {
+                        DeliveryID = delivery.Id,
                         ProductId = product.Id,
-                        Quantity = product.UnitsInStock,
+                        Quantity = 1,
                         Price = Convert.ToDecimal(product.Price)
                     }).ToList()
                 };
@@ -106,7 +127,10 @@ namespace Webshop2
                 db.Order.Add(newOrder);
                 db.SaveChanges();
 
-                Console.WriteLine($"vald frakt: {shippingPrice} SEK");
+                decimal totalAmount = Shoppingcart.CalculateTotalPrice() + (decimal)shippingPrice; // Lägg till frakten till det totala beloppet
+
+                Console.WriteLine($"Totalpriset är: {totalAmount}");
+                Console.WriteLine($"Frakten är vald: {shippingPrice} SEK");
             }
         }
     }

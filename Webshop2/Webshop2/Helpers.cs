@@ -60,6 +60,7 @@ namespace Webshop2.Models
             Console.WriteLine("Välj en kategori för att visa produkter (tryck 0 för att gå tillbaka):");
             if (int.TryParse(Console.ReadLine(), out int selectedCategoryId) && selectedCategoryId > 0)
             {
+                //gör en switch sats här med Linq eller lambda uttryck
                 ShowProductsInCategory(db, selectedCategoryId);
             }
         }
@@ -157,6 +158,10 @@ namespace Webshop2.Models
                                 {
                                     if (selectedProduct.UnitsInStock > quantity)
                                     {
+
+                                        selectedProduct.UnitsInStock -= quantity;
+                                        db.SaveChanges();
+
                                         for (int i = 0; i < quantity; i++)
                                         {
                                             Shoppingcart.shoppingCart.Add(selectedProduct);
