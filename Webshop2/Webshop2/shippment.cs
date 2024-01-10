@@ -56,7 +56,7 @@ namespace Webshop2
             Console.WriteLine("1. Postnord - 50 SEK");
             Console.WriteLine("2. DHL - 100 SEK");
 
-            Console.Write("Enter your choice: ");
+            Console.Write("Ange ditt val: ");
             using (var db = new MyDbContext())
             {
 
@@ -78,7 +78,7 @@ namespace Webshop2
                             return Delivery2;
 
                         default:
-                            Console.WriteLine("Invalid choice. Postnord selected.");
+                            Console.WriteLine("Ogiltligt val. Postnord vald.");
                             var Delivery3 = (from c in db.Delivery where c.Id == 1 select c).SingleOrDefault();
                             return Delivery3;
                     }
@@ -88,7 +88,7 @@ namespace Webshop2
                 }
                 else
                 {
-                    Console.WriteLine("Invalid choice. Postnord selected.");
+                    Console.WriteLine("Ogiltligt val. Postnord vald.");
                     var Delivery4 = (from c in db.Delivery where c.Id == 1 select c).SingleOrDefault();
                     return Delivery4;
                 }
