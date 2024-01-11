@@ -30,8 +30,7 @@ namespace Webshop2
                 RemoveProductsFromDatabase(shoppingCart, db);
 
                 // Töm varukorgen efter betalning
-                shoppingCart.Clear();
-                Console.WriteLine("Varukorgen är nu tom.");
+                Shoppingcart.EmptyShoppingCartAfterPurchase();
             }
             else
             {

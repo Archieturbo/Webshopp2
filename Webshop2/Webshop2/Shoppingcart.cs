@@ -118,6 +118,12 @@ namespace Webshop2
                 Console.WriteLine("Ogiltigt ID. Ange ett numeriskt värde.");
             }
         }
+        public static void EmptyShoppingCartAfterPurchase()
+        {
+            shoppingCart.Clear();
+            Console.WriteLine("Varukorgen har tömts efter betalning.");
+
+        }
         public static decimal CalculateTotalPrice()
         {
             decimal total = 0.0m;
