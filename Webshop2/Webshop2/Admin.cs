@@ -26,49 +26,38 @@ namespace Webshop2
                     Console.WriteLine("Lägg till namn på produkten: ");
                     string name = Console.ReadLine();
                     Console.WriteLine("Lägg till pris: ");
-                    double price = int.Parse(Console.ReadLine());
+                    double price = double.Parse(Console.ReadLine());
                     Console.WriteLine("Lägg till färg: ");
                     string color = Console.ReadLine();
                     Console.WriteLine("Lägg till lagersaldo: ");
                     int unitsInStock = int.Parse(Console.ReadLine());
                     Console.WriteLine("Ange vilken kategori den tillhör (Herr: 1, Dam: 2, Junior: 3): ");
                     var categoryId = int.Parse(Console.ReadLine());
-                    switch (categoryId)
-                    {
-                        case 1: "Herr";
-                           
-                            break;
-                        case 2: "Dam";
-                            break;
-                        case 3: "Junior";
-                            break;
-                        default:
-                            break;
-                    }
                     Console.WriteLine("Ange leverantör: Fashion Supplier AB 1, Scandinavian Fashion AB 2, Style Trends Ab 3");
                     var supplierId = int.Parse(Console.ReadLine());
                     Console.WriteLine("Ange en kort beskrivning om produkten: ");
                     string description = Console.ReadLine();
 
-
-
-
-
                     var product1 = new Product
                     {
-
                         Name = name,
                         Price = price,
                         Color = color,
                         UnitsInStock = unitsInStock,
-                        CategoryId = categoryId,
                         SupplierId = supplierId,
                         Description = description,
-
+                        CategoryId = categoryId
                     };
+
+                    var category = db.Category.Find(categoryId);
+                    if (category != null)
+                    {
+                        product1.Categories.Add(category);
+                    }
+
                     db.Add(product1);
                     db.SaveChanges();
-
+                    
                 }
                 else if (choice == "2")
                 {
