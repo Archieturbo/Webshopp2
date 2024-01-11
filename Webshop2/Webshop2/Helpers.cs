@@ -42,7 +42,8 @@ namespace Webshop2.Models
             RemoveFromCart,
             Search,
             Pay,
-            Exit
+            Exit,
+            Admin
         }
 
 

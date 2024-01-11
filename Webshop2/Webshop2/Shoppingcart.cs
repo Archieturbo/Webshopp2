@@ -124,6 +124,8 @@ namespace Webshop2
             Console.WriteLine("Varukorgen har tömts efter betalning.");
 
         }
+
+
         public static decimal CalculateTotalPrice()
         {
             decimal total = 0.0m;
@@ -135,8 +137,11 @@ namespace Webshop2
 
             return total;
 
+
+
         }
     }
 
-    
 }
+
+

@@ -55,27 +55,19 @@ namespace Webshop2
         }
 
 
-        private static void ShowProducts(List<Product> shoppingCart)
-            {
-                Console.WriteLine("Produkter i varukorgen:");
 
-                foreach (var product in shoppingCart)
-                {
-                    Console.WriteLine($"{product.Name}, Pris: {product.Price:C}");
-                }
-            }
 
-            //private static decimal CalculateTotalPrice(decimal subtotal)
-            //{
-            //    // Exempel: Lägg till moms och frakt här
-            //    decimal taxRate = 0.25m; // 25% moms
-            //    decimal shippingCost = 20.0m; // Fraktkostnad
+        //public static decimal CalculateTotalPrice(decimal subtotal)
+        //{
+        //    // Exempel: Lägg till moms och frakt här
+        //    decimal taxRate = 0.25m; // 25% moms
+        //    decimal shippingCost = 20.0m; // Fraktkostnad
 
-            //    decimal totalPrice = subtotal * (1 + taxRate) + shippingCost;
-            //    return totalPrice;
-            //}
+        //    decimal totalPrice = subtotal * (1 + taxRate) + shippingCost;
+        //    return totalPrice;
+        //}
 
-            private static void ShowPaymentMethods()
+        private static void ShowPaymentMethods()
             {
                 Console.WriteLine("Välj betalningsmetod:");
                 Console.WriteLine("1. Kreditkort");

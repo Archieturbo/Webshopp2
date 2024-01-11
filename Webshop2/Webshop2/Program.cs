@@ -54,6 +54,7 @@ namespace Webshop2
                 Console.WriteLine("6. Sök");
                 Console.WriteLine("7. Betala");
                 Console.WriteLine("8. Avsluta");
+                Console.WriteLine("9. Admin");
 
                 Console.Write("Välj ett alternativ: ");
                 string choice = Console.ReadLine();
@@ -105,10 +106,15 @@ namespace Webshop2
                             decimal totalAmount = Shoppingcart.CalculateTotalPrice();
                             Payment.ProcessPayment(shoppingCart, totalAmount, db);
                             break;
+                        case Helpers.MenuChoice.Admin:
+                            Console.Clear();
+                            Admin.AddNewProductMenu();
+                            break;
 
                         case Helpers.MenuChoice.Exit:
                             running = false;
                             break;
+                        
 
                         default:
                             Console.WriteLine("Ogiltigt val. Försök igen.");
