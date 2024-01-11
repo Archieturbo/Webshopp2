@@ -72,6 +72,7 @@ namespace Webshop2
                         case Helpers.MenuChoice.ShowAllProducts:
                             Console.Clear();
                             Helpers.ShowAllProducts(db, "");
+                            Helpers.ShowProductMenu(db);
                             break;
 
                         case Helpers.MenuChoice.ShowShoppingCart:

@@ -57,75 +57,95 @@ namespace Webshop2
 
                     db.Add(product1);
                     db.SaveChanges();
-                    
+
                 }
+                // Lägg till en loop för att hålla användaren i menyn tills de väljer att gå tillbaka
                 else if (choice == "2")
                 {
-                    // Lägg till en menypunkt för att ändra produkt
-                    Console.WriteLine("Ange produkt-ID: ");
-                    int productId = int.Parse(Console.ReadLine());
-
-                    // Hämta produkten från databasen
-                    Product product = db.Product.FirstOrDefault(p => p.Id == productId);
-
-                    // Lägg till en menypunkt för att ändra varje produktattribut
-                    Console.WriteLine("1. Ändra produktnamn");
-                    Console.WriteLine("2. Ändra infotext");
-                    Console.WriteLine("3. Ändra pris");
-                    Console.WriteLine("4. Ändra produktkategori");
-                    Console.WriteLine("5. Ändra leverantör");
-                    Console.WriteLine("6. Ändra lagersaldo");
-                    Console.WriteLine("7. Tillbaka till huvudmenyn");
-                    Console.Write("Ange ditt val: ");
-                    choice = Console.ReadLine();
-
-                    switch (choice)
+                    while (true)
                     {
-                        case "1":
-                            // Ändra produktnamn
-                            Console.Write("Ange nytt produktnamn: ");
-                            product.Name = Console.ReadLine();
+                        Helpers.ShowAllProducts(db,choice);
+                        Console.WriteLine("Ange produkt-ID (eller 0 för att avsluta): ");
+                        int productId = int.Parse(Console.ReadLine());
+
+                        if (productId == 0)
+                        {
+                            // Avsluta loopen om användaren väljer 0
                             break;
-                        case "2":
-                            // Ändra infotext
-                            Console.Write("Ange ny infotext: ");
-                            product.Description = Console.ReadLine();
-                            break;
-                        case "3":
-                            // Ändra pris
-                            Console.Write("Ange nytt pris: ");
-                            product.Price = double.Parse(Console.ReadLine());
-                            break;
-                        case "4":
-                            // Ändra produktkategori
-                            Console.Write("Ange ny produktkategori: ");
-                            product.CategoryId = int.Parse(Console.ReadLine());
-                            break;
-                        case "5":
-                            // Ändra leverantör
-                            Console.Write("Ange ny leverantör: ");
-                            product.SupplierId = int.Parse(Console.ReadLine());
-                            break;
-                        case "6":
-                            // Ändra lagersaldo
-                            Console.Write("Ange nytt lagersaldo: ");
-                            product.UnitsInStock = int.Parse(Console.ReadLine());
-                            break;
-                        case "7":
-                            // Gå tillbaka till huvudmenyn
-                            Helpers.DisplayMenu();
-                            break;
-                        default:
-                            // Ogiltigt val
-                            Console.WriteLine("Ogiltigt val. Försök igen.");
-                            break;
+                        }
+
+                        // Hämta produkten från databasen
+                        Product product = db.Product.FirstOrDefault(p => p.Id == productId);
+
+                        if (product == null)
+                        {
+                            Console.WriteLine("Produkten med det angivna ID:t hittades inte.");
+                            continue; // Gå tillbaka till början av loopen
+                        }
+
+                        // Lägg till en meny-loop för att ändra olika attribut
+                        while (true)
+                        {
+                            Console.WriteLine("1. Ändra produktnamn");
+                            Console.WriteLine("2. Ändra infotext");
+                            Console.WriteLine("3. Ändra pris");
+                            Console.WriteLine("4. Ändra produktkategori");
+                            Console.WriteLine("5. Ändra leverantör");
+                            Console.WriteLine("6. Ändra lagersaldo");
+                            Console.WriteLine("7. Tillbaka till huvudmenyn");
+                            Console.Write("Ange ditt val: ");
+                            choice = Console.ReadLine();
+
+                            switch (choice)
+                            {
+                                case "1":
+                                    // Ändra produktnamn
+                                    Console.Write("Ange nytt produktnamn: ");
+                                    product.Name = Console.ReadLine();
+                                    break;
+                                case "2":
+                                    // Ändra infotext
+                                    Console.Write("Ange ny infotext: ");
+                                    product.Description = Console.ReadLine();
+                                    break;
+                                case "3":
+                                    // Ändra pris
+                                    Console.Write("Ange nytt pris: ");
+                                    product.Price = double.Parse(Console.ReadLine());
+                                    break;
+                                case "4":
+                                    // Ändra produktkategori
+                                    Console.Write("Ange ny produktkategori: ");
+                                    product.CategoryId = int.Parse(Console.ReadLine());
+                                    break;
+                                case "5":
+                                    // Ändra leverantör
+                                    Console.Write("Ange ny leverantör: ");
+                                    product.SupplierId = int.Parse(Console.ReadLine());
+                                    break;
+                                case "6":
+                                    // Ändra lagersaldo
+                                    Console.Write("Ange nytt lagersaldo: ");
+                                    product.UnitsInStock = int.Parse(Console.ReadLine());
+                                    break;
+                                case "7":
+                                    // Gå tillbaka till huvudmenyn
+                                    Helpers.DisplayMenu();
+                                    break;
+                                default:
+                                    // Ogiltigt val
+                                    Console.WriteLine("Ogiltigt val. Försök igen.");
+                                    break;
+                            }
+                                
+
+                            // Spara ändringarna i databasen
+                            db.SaveChanges();
+                            Console.WriteLine("Ändringarna har sparats i databasen.");
+                        }
                     }
-
-                    // Spara ändringarna i databasen
-                    db.SaveChanges();
-
-                    Console.WriteLine("Ändringarna har sparats i databasen.");
                 }
+
                 else if (choice == "3")
                 {
                     // Lägg till en menypunkt för att ta bort produkt

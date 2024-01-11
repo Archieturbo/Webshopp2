@@ -127,7 +127,7 @@ namespace Webshop2.Models
                     $"Kategorier: {Helpers.GetCategoryNames(product.Categories)}");
 
             }
-            ShowProductMenu(db);
+           
             Console.WriteLine("---------------------------------");
             
         }
