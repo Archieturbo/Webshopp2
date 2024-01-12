@@ -9,6 +9,28 @@ namespace Webshop2
 {  //Lägg till savechanges nånstans! 
     internal class Admin
     {
+        public static void ChangeProductCategory(int productId, int categoryId)
+        {
+            using (var db = new MyDbContext())
+            {
+                // Hämta produkten från databasen
+                var product = db.Product.FirstOrDefault(p => p.Id == productId);
+
+                // Kontrollera om kategori-ID:t finns i databasen
+                var category = db.Category.Where(c => c.Id == categoryId).FirstOrDefault();
+                if (category == null)
+                {
+                    Console.WriteLine("Den angivna produktkategorin finns inte.");
+                    return;
+                }
+
+                // Sätt produktens kategori-ID till det angivna värdet
+                product.CategoryId = categoryId;
+
+                // Spara ändringarna i databasen
+                db.SaveChanges();
+            }
+        }
         public static void AddNewProductMenu()
         {
             using (var db = new MyDbContext())
@@ -33,6 +55,7 @@ namespace Webshop2
                     int unitsInStock = int.Parse(Console.ReadLine());
                     Console.WriteLine("Ange vilken kategori den tillhör (Herr: 1, Dam: 2, Junior: 3): ");
                     var categoryId = int.Parse(Console.ReadLine());
+                    ChangeProductCategory(productId, categoryId);
                     Console.WriteLine("Ange leverantör: Fashion Supplier AB 1, Scandinavian Fashion AB 2, Style Trends Ab 3");
                     var supplierId = int.Parse(Console.ReadLine());
                     Console.WriteLine("Ange en kort beskrivning om produkten: ");
@@ -58,6 +81,7 @@ namespace Webshop2
                     db.Add(product1);
                     db.SaveChanges();
 
+                   
                 }
                 // Lägg till en loop för att hålla användaren i menyn tills de väljer att gå tillbaka
                 else if (choice == "2")
