@@ -11,18 +11,24 @@ namespace Webshop2.Models
 
         public static void DisplayMenu()
         {
-            Console.WriteLine("Välj ett alternativ:");
-            foreach (var menuChoice in Enum.GetValues(typeof(MenuChoice)))
-            {
-                Console.WriteLine($"{(int)menuChoice}. {menuChoice}");
-            }
+            Console.WriteLine("Huvudmeny:");
+            Console.WriteLine("1. Visa alla kategorier");
+            Console.WriteLine("2. Visa alla produkter");
+            Console.WriteLine("3. Visa varukorg");
+            Console.WriteLine("4. Ändra antal i varukorgen");
+            Console.WriteLine("5. Ta bort produkt från varukorgen");
+            Console.WriteLine("6. Sök");
+            Console.WriteLine("7. Betala");
+            Console.WriteLine("8. Avsluta");
+            Console.WriteLine("9. Admin");
         }
 
         public static MenuChoice GetMenuChoice()
         {
             while (true)
             {
-                if (Enum.TryParse(Console.ReadLine(), out MenuChoice choice))
+                if (Enum.TryParse(Console.ReadLine(), out MenuChoice choice) &&
+                    Enum.IsDefined(typeof(MenuChoice), choice))
                 {
                     return choice;
                 }
@@ -32,6 +38,7 @@ namespace Webshop2.Models
                 }
             }
         }
+
 
         public enum MenuChoice
         {

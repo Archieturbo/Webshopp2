@@ -157,8 +157,6 @@ namespace Webshop2
 
 
 
-//Problem som måste lösas!
-// 1. Kategorierna ändras inte när man är i Admindelen och försöker ändra. Det ändras i SSMS men inte här i visual studio. 
-//2. När man är i admindelen och har ändrat något och vill gå tillbaka till huvudmenyn så kommer enum Meny fram (ENGELSKA). 
+//Problem som måste lösas! 
 //3. ENDA DELEN SOM ÄR KVAR PÅ ADMIN ÄR ÄNDRA DELEN OCH KUNDDELEN. 
 //4. Småfix, lägg in trycatch, Fixa UPPER CASE på ja/nej när man lägger in i varukorg. 
