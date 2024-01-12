@@ -21,8 +21,13 @@ namespace Webshop2.Models
         public Delivery? Delivery { get; set; }
         public ICollection<Orderdetail> Orderdetails { get; set; }
 
+        public decimal CalculateTotalAmount()
+        {
+            decimal totalAmount = Orderdetails.Sum(od => (od.Quantity ?? 0) * (od.Price ?? 0));
+            return totalAmount;
+        }
 
-       
+
 
 
     }

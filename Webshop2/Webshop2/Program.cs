@@ -109,7 +109,10 @@ namespace Webshop2
                             break;
                         case Helpers.MenuChoice.Admin:
                             Console.Clear();
+
                             Admin.AddNewProductMenu();
+                            AdminCustomer.CustomerChange();
+                            AdminCustomer.DisplayOrderHistory(0,db);
                             break;
 
                         case Helpers.MenuChoice.Exit:

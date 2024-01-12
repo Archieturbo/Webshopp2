@@ -51,7 +51,8 @@ namespace Webshop2
                 Console.WriteLine("1. Lägg till ny produkt");
                 Console.WriteLine("2. Ändra produkt");
                 Console.WriteLine("3. Ta bort produkt");
-                Console.WriteLine("4. Tillbaka till huvudmenyn");
+                Console.WriteLine("4. Ändra uppgifter om kunden/Historik");
+                Console.WriteLine("5. Tillbaka till huvudmenyn");
                 Console.Write("Ange ditt val: ");
                 string subchoice = Console.ReadLine();
 
@@ -200,12 +201,14 @@ namespace Webshop2
                 else if (subchoice == "4")
                 {
                     Console.Clear();
-                    // Gå tillbaka till huvudmenyn  
+
+                    
                    
                 }
-                else
+                else if(subchoice == "5")
                 {
-                    // Ogiltigt val
+                    Console.Clear();
+                    // Gå tillbaka till huvudmenyn  
 
 
 
