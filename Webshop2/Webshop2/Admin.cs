@@ -99,7 +99,7 @@ namespace Webshop2
 
                 }
                 
-                // Lägg till en loop för att hålla användaren i menyn tills de väljer att gå tillbaka
+              
                 else if (subchoice == "2")
                 {
                     while (true)
@@ -120,10 +120,8 @@ namespace Webshop2
                         if (product == null)
                         {
                             Console.WriteLine("Produkten med det angivna ID:t hittades inte.");
-                            continue; // Gå tillbaka till början av loopen
+                          
                         }
-
-                        // Lägg till en meny-loop för att ändra olika attribut
                         while (true)
                         {
                             Console.WriteLine("1. Ändra produktnamn");
@@ -139,47 +137,45 @@ namespace Webshop2
                             switch (subchoice)
                             {
                                 case "1":
-                                    // Ändra produktnamn
                                     Console.Write("Ange nytt produktnamn: ");
                                     product.Name = Console.ReadLine();
                                     break;
-                                case "2":
-                                    // Ändra infotext
+                                case "2":                                
                                     Console.Write("Ange ny infotext: ");
                                     product.Description = Console.ReadLine();
                                     break;
                                 case "3":
-                                    // Ändra pris
+                               
                                     Console.Write("Ange nytt pris: ");
                                     product.Price = double.Parse(Console.ReadLine());
                                     break;
                                 case "4":
-                                    // Ändra produktkategori
+                                  
                                     Console.Write("Ange ny produktkategori: ");
                                     product.CategoryId = int.Parse(Console.ReadLine());
                                     break;
                                 case "5":
-                                    // Ändra leverantör
+                              
                                     Console.Write("Ange ny leverantör: ");
                                     product.SupplierId = int.Parse(Console.ReadLine());
                                     break;
                                 case "6":
-                                    // Ändra lagersaldo
+                             
                                     Console.Write("Ange nytt lagersaldo: ");
                                     product.UnitsInStock = int.Parse(Console.ReadLine());
                                     break;
                                 case "7":
-                                    // Gå tillbaka till huvudmenyn
+                                    Console.Clear();
                                     Helpers.DisplayMenu();
                                     break;
                                 default:
-                                    // Ogiltigt val
+                               
                                     Console.WriteLine("Ogiltigt val. Försök igen.");
                                     break;
                             }
                                 
 
-                            // Spara ändringarna i databasen
+                          
                             db.SaveChanges();
                             Console.WriteLine("Ändringarna har sparats i databasen.");
                         }
@@ -188,11 +184,11 @@ namespace Webshop2
 
                 else if (subchoice == "3")
                 {
-                    // Lägg till en menypunkt för att ta bort produkt
+                  
                     Console.WriteLine("Ange produkt-ID: ");
                     int productId = int.Parse(Console.ReadLine());
 
-                    // Ta bort produkten från databasen
+                 
                     db.Product.Remove(db.Product.FirstOrDefault(p => p.Id == productId));
                     db.SaveChanges();
 
@@ -201,14 +197,15 @@ namespace Webshop2
                 else if (subchoice == "4")
                 {
                     Console.Clear();
-
+                    AdminCustomer.CustomerChange();
                     
                    
                 }
                 else if(subchoice == "5")
                 {
-                    Console.Clear();
-                    // Gå tillbaka till huvudmenyn  
+                   
+                   
+                 
 
 
 

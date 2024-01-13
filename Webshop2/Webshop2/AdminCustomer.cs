@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,28 +16,47 @@ namespace Webshop2
             {
                 while (true)
                 {
+                    Console.WriteLine("1: Historik för en kund.");
+                    Console.WriteLine("2: Ändra uppgifter");
+                    Console.WriteLine("3: Återgå till Huvudmeny");
+                    var choice = int.Parse(Console.ReadLine());
 
-
-                    DisplayAllCustomers(db);
-
-                    Console.WriteLine("Ange kundens ID för att ändra uppgifter: ");
-                    int customerId = int.Parse(Console.ReadLine());
-
-                    // Hämta kunden från databasen
-                    Customer currentCustomer = db.Customer.FirstOrDefault(c => c.Id == customerId);
-
-                    if (currentCustomer == null)
+                    switch (choice)
                     {
-                        Console.WriteLine("Kunden med det angivna ID:t hittades inte.");
-                        return;
-                    }
+                        case 1:
+                            Console.Clear();
+                            DisplayAllCustomers(db);
+                            DisplayOrderHistory();
 
-                    DisplayCustomerChangeMenu(currentCustomer, db);
+
+                            break;
+                        case 2:
+                            Console.Clear();
+                            DisplayAllCustomers(db);
+
+                            Console.Write("Ange kundens ID för att ändra uppgifter: ");
+                            int customerId = int.Parse(Console.ReadLine());
+
+                            // Hämta kunden från databasen
+                            Customer currentCustomer = db.Customer.FirstOrDefault(c => c.Id == customerId);
+
+                            if (currentCustomer == null)
+                            {
+                                Console.WriteLine("Kunden med det angivna ID:t hittades inte.");
+                                return;
+                            }
+                            DisplayCustomerChangeMenu(currentCustomer, db);
+                            break;
+                        case 3:
+                            
+                             
+                            break;
+                    }
                     break;
                 }
+
             }
         }
-
         private static void DisplayAllCustomers(MyDbContext db)
         {
             var customers = db.Customer.ToList();
@@ -46,7 +66,8 @@ namespace Webshop2
                 Console.WriteLine("Lista över kunder:");
                 foreach (var customer in customers)
                 {
-                    Console.WriteLine($"KundID: {customer.Id}, Namn: {customer.Name}, Email: {customer.Email}");
+                    Console.WriteLine($"KundID: {customer.Id}, Namn: {customer.Name}, Email: {customer.Email}, Address: {customer.Adress}," +
+                        $" Land: {customer.Country}, Stad: {customer.City}, Födelsedatum: {customer.Birthday}, Tel: {customer.Phone}");
                 }
             }
             else
@@ -54,7 +75,6 @@ namespace Webshop2
                 Console.WriteLine("Det finns inga kunder i databasen.");
             }
         }
-
         public static void DisplayCustomerChangeMenu(Customer currentCustomer, MyDbContext db)
         {
             Console.WriteLine("1. Ändra Namn");
@@ -64,12 +84,13 @@ namespace Webshop2
             Console.WriteLine("5. Ändra Födelsedatum");
             Console.WriteLine("6. Ändra Telefonnummer");
             Console.WriteLine("7. Ändra Email");
+            Console.WriteLine("8: Återgå till adminsidan");
             Console.WriteLine("Ange ditt val: ");
             string adminChoice = Console.ReadLine();
 
             switch (adminChoice)
             {
-                
+
                 case "1":
                     Console.WriteLine("Ange nytt namn: ");
                     currentCustomer.Name = Console.ReadLine();
@@ -79,57 +100,75 @@ namespace Webshop2
                     currentCustomer.Adress = Console.ReadLine();
                     break;
                 case "3":
-                    Console.WriteLine("Ange nytt land: ");
+                    Console.Write("Ange nytt land: ");
                     currentCustomer.Country = Console.ReadLine();
                     break;
                 case "4":
-                    Console.WriteLine("Ange ny stad: ");
+                    Console.Write("Ange ny stad: ");
                     currentCustomer.City = Console.ReadLine();
                     break;
                 case "5":
-                    Console.WriteLine("Ange nytt födelsedatum (YYYY-MM-DD): ");
+                    Console.Write("Ange nytt födelsedatum (YYYY-MM-DD): ");
                     currentCustomer.Birthday = DateTime.Parse(Console.ReadLine());
                     break;
                 case "6":
-                    Console.WriteLine("Ange nytt telefonnummer: ");
+                    Console.Write("Ange nytt telefonnummer: ");
                     currentCustomer.Phone = Console.ReadLine();
                     break;
                 case "7":
-                    Console.WriteLine("Ange ny email: ");
+                    Console.Write("Ange ny email: ");
                     currentCustomer.Email = Console.ReadLine();
                     break;
                 default:
                     Console.WriteLine("Ogiltigt val.");
+                    DisplayCustomerChangeMenu(currentCustomer, db);
+                    break;
+                case "8":
+                    Console.Clear();
+                    CustomerChange();
                     break;
             }
-
             // Spara ändringarna i databasen
             db.SaveChanges();
 
             Console.WriteLine("Kunduppgifter har uppdaterats.");
         }
-
-     
-    public static void DisplayOrderHistory(int customerId, MyDbContext db)
+        public static void DisplayOrderHistory()
         {
-            // Hämta beställningshistoriken från databasen för den aktuella kunden
-            var orderHistory = db.Order
-                .Where(o => o.CustomerId == customerId)
-                .ToList();
-
-            if (orderHistory.Count > 0)
+            using (var db = new MyDbContext())
             {
-                Console.WriteLine("Beställningshistorik:");
-
-                foreach (var order in orderHistory)
+                Console.Write("Välj Id för att se historik: ");
+                if(int.TryParse(Console.ReadLine(), out var customerId))
                 {
-                    Console.WriteLine($"OrderID: {order.Id}, Datum: {order.OrderDate}, Totalt pris: {order.CalculateTotalAmount()}");
+                  
+                    var customer = db.Customer.FirstOrDefault(x => x.Id == customerId);
+
+                    if(customer != null)
+                    {
+                        var orderhistory = db.Order.Include(o  => o.Orderdetails)
+                            .Where(o => o.CustomerId == customerId)
+                            .ToList();
+
+                        Console.WriteLine($"Beställningshistorik för: {customer.Name} med Id: {customer.Id}");
+
+                        foreach(var order in orderhistory)
+                        {
+                            //var totalprize = order.Orderdetails.Select(tp  => tp.Price).ToList();
+                            Console.Write($"OrderID: {order.Id}, Datum: {order.OrderDate}, Totalt pris:");
+
+                            foreach(var orderdetails in order.Orderdetails)
+                            {
+                                
+                                Console.Write($"{orderdetails.Price}");
+                                Console.WriteLine();
+                            }
+                        }
+                       
+                        
+                    }
                 }
             }
-            else
-            {
-                Console.WriteLine("Ingen beställningshistorik hittad för kunden.");
-            }
+
         }
     }
 }

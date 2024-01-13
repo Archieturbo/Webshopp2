@@ -62,11 +62,7 @@ namespace Webshop2
 
 
                 if (int.TryParse(Console.ReadLine(), out int shippingChoice))
-
-
                 {
-
-
                     switch (shippingChoice)
                     {
                         case 1:
@@ -82,9 +78,6 @@ namespace Webshop2
                             var Delivery3 = (from c in db.Delivery where c.Id == 1 select c).SingleOrDefault();
                             return Delivery3;
                     }
-
-
-
                 }
                 else
                 {
@@ -94,9 +87,6 @@ namespace Webshop2
                 }
             }
         }
-
-
-
         public static void PlaceOrder(Customer customer, double? shippingPrice, Delivery delivery)
         {
             using (var db = new MyDbContext())
