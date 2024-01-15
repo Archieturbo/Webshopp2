@@ -52,7 +52,8 @@ namespace Webshop2
                 Console.WriteLine("2. Ändra produkt");
                 Console.WriteLine("3. Ta bort produkt");
                 Console.WriteLine("4. Ändra uppgifter om kunden/Historik");
-                Console.WriteLine("5. Tillbaka till huvudmenyn");
+                Console.WriteLine("5. Butiksstatus");
+                Console.WriteLine("6. Tillbaka till huvudmenyn");
                 Console.Write("Ange ditt val: ");
                 string subchoice = Console.ReadLine();
 
@@ -68,7 +69,7 @@ namespace Webshop2
                     int unitsInStock = int.Parse(Console.ReadLine());
                     Console.WriteLine("Ange vilken kategori den tillhör (Herr: 1, Dam: 2, Junior: 3): ");
                     var categoryId = int.Parse(Console.ReadLine());
-                    
+
                     Console.WriteLine("Ange leverantör: Fashion Supplier AB 1, Scandinavian Fashion AB 2, Style Trends Ab 3");
                     var supplierId = int.Parse(Console.ReadLine());
                     Console.WriteLine("Ange en kort beskrivning om produkten: ");
@@ -98,13 +99,13 @@ namespace Webshop2
 
 
                 }
-                
-              
+
+
                 else if (subchoice == "2")
                 {
                     while (true)
                     {
-                        Helpers.ShowAllProducts(db,subchoice);
+                        Helpers.ShowAllProducts(db, subchoice);
                         Console.WriteLine("Ange produkt-ID (eller 0 för att avsluta): ");
                         int productId = int.Parse(Console.ReadLine());
 
@@ -120,7 +121,7 @@ namespace Webshop2
                         if (product == null)
                         {
                             Console.WriteLine("Produkten med det angivna ID:t hittades inte.");
-                          
+
                         }
                         while (true)
                         {
@@ -140,27 +141,27 @@ namespace Webshop2
                                     Console.Write("Ange nytt produktnamn: ");
                                     product.Name = Console.ReadLine();
                                     break;
-                                case "2":                                
+                                case "2":
                                     Console.Write("Ange ny infotext: ");
                                     product.Description = Console.ReadLine();
                                     break;
                                 case "3":
-                               
+
                                     Console.Write("Ange nytt pris: ");
                                     product.Price = double.Parse(Console.ReadLine());
                                     break;
                                 case "4":
-                                  
+
                                     Console.Write("Ange ny produktkategori: ");
                                     product.CategoryId = int.Parse(Console.ReadLine());
                                     break;
                                 case "5":
-                              
+
                                     Console.Write("Ange ny leverantör: ");
                                     product.SupplierId = int.Parse(Console.ReadLine());
                                     break;
                                 case "6":
-                             
+
                                     Console.Write("Ange nytt lagersaldo: ");
                                     product.UnitsInStock = int.Parse(Console.ReadLine());
                                     break;
@@ -169,13 +170,13 @@ namespace Webshop2
                                     Helpers.DisplayMenu();
                                     break;
                                 default:
-                               
+
                                     Console.WriteLine("Ogiltigt val. Försök igen.");
                                     break;
                             }
-                                
 
-                          
+
+
                             db.SaveChanges();
                             Console.WriteLine("Ändringarna har sparats i databasen.");
                         }
@@ -184,11 +185,11 @@ namespace Webshop2
 
                 else if (subchoice == "3")
                 {
-                  
+
                     Console.WriteLine("Ange produkt-ID: ");
                     int productId = int.Parse(Console.ReadLine());
 
-                 
+
                     db.Product.Remove(db.Product.FirstOrDefault(p => p.Id == productId));
                     db.SaveChanges();
 
@@ -198,19 +199,72 @@ namespace Webshop2
                 {
                     Console.Clear();
                     AdminCustomer.CustomerChange();
-                    
-                   
+
+
                 }
-                else if(subchoice == "5")
+                else if (subchoice == "5")
                 {
-                   
-                   
-                 
+                    while (true)
+                    {
+                        Console.WriteLine("1. Bästsäljande produkter");
+                        Console.WriteLine("2. Produkter sorterade på pris");
+                        Console.WriteLine("3. Försäljning sorterat på leverantörer");
+                        string CompanyInfoChoice = Console.ReadLine();
+
+                        switch (CompanyInfoChoice)
+                        {
+                            case "1":
+                                var bestSellingProducts = db.Orderdetail
+                                    .GroupBy(od => od.Product)
+                                    .OrderByDescending(group => group.Sum(od => od.Quantity))
+                                    .Select(group => new
+                                    {
+                                        Product = group.Key,
+                                        TotalQuantitySold = group.Sum(od => od.Quantity)
+                                    })
+                                    .Take(10)
+                                    .ToList();
+
+                                foreach (var item in bestSellingProducts)
+                                {
+                                    Console.WriteLine("Namn: " + item.Product.Name + " Pris: " + item.Product.Price + "kr");
+                                    Console.WriteLine("Antal sålda: " + item.TotalQuantitySold);
+                                    Console.WriteLine();
+                                }
+                                break;
+                            case "2":
+                                var productsSortedByPriceAsc = db.Product
+                            .OrderBy(p => p.Price)
+                             .ToList();
+                                foreach (var product in productsSortedByPriceAsc)
+                                {
+                                    Console.WriteLine("Produktnamn: " + product.Name + " Pris: " + product.Price + "kr" );
+                                }
+                                break; 
 
 
 
 
 
+
+
+
+                            case "3":
+                               
+                                break;
+                            case "4":
+
+
+                                break;
+
+                        }
+
+
+
+
+
+
+                    }
                 }
             }
         }

@@ -47,47 +47,43 @@ namespace Webshop2
                     Console.WriteLine("Ogiltigt datumformat. Ange datumet i formatet YYYY-MM-DD." );
                 }
             }
-            int customerPhone = 0; // Initialisera till ett värde som inte är 10 siffror
-            while (true)
-            {
-                Console.Write("Tel: ");
-                string phoneInput = Console.ReadLine();
+            
+        string customerPhone;
+    while (true)
+    {
+        Console.Write("Tel: ");
+        string phoneInput = Console.ReadLine();
 
-                try
-                {
-                    if (phoneInput.Length == 10 && int.TryParse(phoneInput, out customerPhone))
-                    {
-                        // Telefonnumret har rätt längd och kan konverteras till en int
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Ogiltig längd eller format på telefonnummer. Ange 10 siffror.");
-                    }
-                }
-                catch (FormatException)
-                {
-                    Console.WriteLine("Telefonnumret måste anges i nummerformat. T.ex: 0731234578 (10 siffror)");
-                }
+        try
+        {
+            if (phoneInput.Length == 10)
+            {
+                // Telefonnumret har rätt längd
+                customerPhone = phoneInput;
+                break;
             }
-
-
-
-
-
-            return new Customer
+            else
             {
-                Name = customerName,
-                Country = customerCountry,
-                Adress = customerAddress,
-                City = customerCity,
-                Birthday = customerBirthday,
-                Phone = customerPhone.ToString(),
-                Email = customerEmail
-            };
-
-
+                Console.WriteLine("Ogiltig längd på telefonnummer. Ange 10 siffror.");
+            }
         }
+        catch (FormatException)
+        {
+    Console.WriteLine("Felaktigt format på telefonnumret. Ange 10 siffror.");
+}
+    }
+
+    return new Customer
+    {
+        Name = customerName,
+        Country = customerCountry,
+        Adress = customerAddress,
+        City = customerCity,
+        Birthday = customerBirthday,
+        Phone = customerPhone,
+        Email = customerEmail
+    };
+}
 
 
         public static Delivery SelectShippingMethod()
