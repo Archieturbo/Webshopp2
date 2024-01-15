@@ -90,16 +90,16 @@ namespace Webshop2.Models
                     switch (category.CategoryName)
                     {
                         case "Herr":
-                            Console.WriteLine($"Herr - ID: {product.Id}, Produkt: {product.Name}, Pris: {product.Price:C}");
+                            Console.WriteLine($"Herr - ID: {product.Id}, Produkt: {product.Name}, Pris: {product.Price}");
                             break;
 
                         case "Dam":
-                            Console.WriteLine($"Dam - ID: {product.Id}, Produkt: {product.Name}, Pris: {product.Price:C}");
+                            Console.WriteLine($"Dam - ID: {product.Id}, Produkt: {product.Name}, Pris: {product.Price}");
                             break;
 
 
                         default:
-                            Console.WriteLine($"Junior - ID: {product.Id}, Produkt: {product.Name}, Pris: {product.Price:C}");
+                            Console.WriteLine($"Junior - ID: {product.Id}, Produkt: {product.Name}, Pris: {product.Price}");
                             break;
                     }
                 }

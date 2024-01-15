@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -101,7 +102,7 @@ namespace Webshop2
                 }
 
 
-                else if (subchoice == "2")
+                if (subchoice == "2")
                 {
                     while (true)
                     {
@@ -183,7 +184,7 @@ namespace Webshop2
                     }
                 }
 
-                else if (subchoice == "3")
+                if (subchoice == "3")
                 {
 
                     Console.WriteLine("Ange produkt-ID: ");
@@ -195,25 +196,32 @@ namespace Webshop2
 
                     Console.WriteLine("Produkten har tagits bort från databasen.");
                 }
-                else if (subchoice == "4")
+                if (subchoice == "4")
                 {
                     Console.Clear();
                     AdminCustomer.CustomerChange();
 
 
                 }
-                else if (subchoice == "5")
+                if (subchoice == "5")
                 {
+                    
                     while (true)
                     {
+                        Console.Clear();
                         Console.WriteLine("1. Bästsäljande produkter");
                         Console.WriteLine("2. Produkter sorterade på pris");
                         Console.WriteLine("3. Försäljning sorterat på leverantörer");
+                        Console.WriteLine("4. De 10 senaste beställningarna");
+                        Console.WriteLine("5. Återgå till huvudmeny");
                         string CompanyInfoChoice = Console.ReadLine();
 
                         switch (CompanyInfoChoice)
                         {
                             case "1":
+                                Console.Clear();
+                                Console.WriteLine("Bäst säljande produkter: ");
+                                Console.WriteLine("-----------------------");
                                 var bestSellingProducts = db.Orderdetail
                                     .GroupBy(od => od.Product)
                                     .OrderByDescending(group => group.Sum(od => od.Quantity))
@@ -233,39 +241,87 @@ namespace Webshop2
                                 }
                                 break;
                             case "2":
+                                Console.Clear();
+                                Console.WriteLine("Produkter sorterade på pris: ");
+                                Console.WriteLine("---------------------------");
                                 var productsSortedByPriceAsc = db.Product
-                            .OrderBy(p => p.Price)
-                             .ToList();
+                                    .OrderBy(p => p.Price)
+                                    .ToList();
                                 foreach (var product in productsSortedByPriceAsc)
                                 {
-                                    Console.WriteLine("Produktnamn: " + product.Name + " Pris: " + product.Price + "kr" );
+                                    Console.WriteLine("Produktnamn: " + product.Name + " Pris: " + product.Price + "kr");
                                 }
-                                break; 
-
-
-
-
-
-
+                                break;
 
 
                             case "3":
-                               
+                                Console.Clear();
+                                Console.WriteLine("Försäljning sorterat på leverantörer: ");
+                                Console.WriteLine("------------------------------------");
+                                var salesBySupplier = db.Orderdetail
+                                     .GroupBy(od => od.Product.Supplier)
+                                     .OrderByDescending(group => group.Sum(od => od.Quantity * od.Price))
+                                     .Select(group => new { Supplier = group.Key, TotalSales = group.Sum(od => od.Quantity * od.Price) })
+                                     .ToList();
+
+                                foreach (var sales in salesBySupplier)
+                                {
+                                    Console.WriteLine($"{sales.Supplier.CompanyName}  {sales.TotalSales:C2}");
+                                }
                                 break;
                             case "4":
+                                Console.Clear();
+                                Console.WriteLine("De 10 senaste beställningarna: ");
+                                Console.WriteLine("-----------------------------");
 
+                                var latestOrders = db.Order
+                                    .OrderByDescending(o => o.OrderDate).Include(o => o.Orderdetails)
+                                    .Take(10)
+                                    .Select(order => new
+                                    {
+                                        OrderId = order.Id,
+                                        OrderDate = order.OrderDate,
+                                        CustomerName = order.Customer != null ? order.Customer.Name : "Beställningen har ingen kund.",
+                                        TotalAmount = order.CalculateTotalAmount()
+                                    })
+                                    .ToList();
+
+                                foreach (var order in latestOrders)
+                                {
+                                    Console.WriteLine($"Order-ID: {order.OrderId}");
+                                    Console.WriteLine($"Datum: {order.OrderDate}");
+                                    Console.WriteLine($"Kund: {order.CustomerName}");
+                                    Console.WriteLine($"Totalsumma: {order.TotalAmount} kr");
+                                    Console.WriteLine("----------------");
+
+                                }
 
                                 break;
+
+                                case "5":
+                                Console.Clear();
+                                AddNewProductMenu();
+                                break;
+
 
                         }
 
 
-
+                        break;
 
 
 
                     }
                 }
+                 if (subchoice == "6")
+                {
+                    Console.Clear();
+                   
+                }
+
+
+
+
             }
         }
     }
