@@ -154,7 +154,7 @@ namespace Webshop2.Models
                 Console.WriteLine($"Lagerstatus: {product.UnitsInStock}");
 
                 Console.WriteLine("Vill du lägga till produkten i varukorgen? (Ja/Nej)");
-                string addToCartChoice = Console.ReadLine();
+                string addToCartChoice = Console.ReadLine().ToLower();
 
                 if (addToCartChoice == "ja")
                 {

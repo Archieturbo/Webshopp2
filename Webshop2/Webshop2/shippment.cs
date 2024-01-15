@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,11 +31,47 @@ namespace Webshop2
             Console.Write("Email: ");
             string customerEmail = Console.ReadLine();
 
-            Console.Write("Födelsedatum (YYYY-MM-DD): ");
-            string customerBirthday = Console.ReadLine();
+            DateTime customerBirthday;
 
-            Console.Write("Tel: ");
-            int customerPhone = int.Parse(Console.ReadLine());
+            while (true)
+            {
+                try
+                {
+                    Console.Write("Födelsedatum (YYYY-MM-DD): ");
+                    string input = Console.ReadLine();
+                    customerBirthday = DateTime.Parse(input);
+                    break; // Om konverteringen lyckas, bryt loopen
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Ogiltigt datumformat. Ange datumet i formatet YYYY-MM-DD." );
+                }
+            }
+            int customerPhone = 0; // Initialisera till ett värde som inte är 10 siffror
+            while (true)
+            {
+                Console.Write("Tel: ");
+                string phoneInput = Console.ReadLine();
+
+                try
+                {
+                    if (phoneInput.Length == 10 && int.TryParse(phoneInput, out customerPhone))
+                    {
+                        // Telefonnumret har rätt längd och kan konverteras till en int
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Ogiltig längd eller format på telefonnummer. Ange 10 siffror.");
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Telefonnumret måste anges i nummerformat. T.ex: 0731234578 (10 siffror)");
+                }
+            }
+
+
 
 
 
@@ -44,11 +81,14 @@ namespace Webshop2
                 Country = customerCountry,
                 Adress = customerAddress,
                 City = customerCity,
-                Birthday = DateTime.Parse(customerBirthday),
+                Birthday = customerBirthday,
                 Phone = customerPhone.ToString(),
                 Email = customerEmail
             };
+
+
         }
+
 
         public static Delivery SelectShippingMethod()
         {

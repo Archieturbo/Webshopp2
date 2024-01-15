@@ -160,5 +160,5 @@ namespace Webshop2
 
 
 //Problem som måste lösas! 
-//3. ENDA DELEN SOM ÄR KVAR PÅ ADMIN ÄR ÄNDRA DELEN OCH KUNDDELEN. 
+ 
 //4. Småfix, lägg in trycatch, Fixa UPPER CASE på ja/nej när man lägger in i varukorg. 

@@ -160,8 +160,10 @@ namespace Webshop2
                             {
                                 
                                 Console.Write($"{orderdetails.Price}");
-                                Console.WriteLine();
+                                
+                               
                             }
+                         
                         }
                        
                         

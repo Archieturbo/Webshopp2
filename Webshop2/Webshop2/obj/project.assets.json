@@ -2885,19 +2885,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Abdim\\.nuget\\packages\\": {}
+    "C:\\Users\\vince\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Abdim\\OneDrive\\Git\\Webshopp2\\Webshop2\\Webshop2\\Webshop2.csproj",
+      "projectUniqueName": "C:\\Users\\vince\\Skrivbord\\Webshopp2\\Webshop2\\Webshop2\\Webshop2.csproj",
       "projectName": "Webshop2",
-      "projectPath": "C:\\Users\\Abdim\\OneDrive\\Git\\Webshopp2\\Webshop2\\Webshop2\\Webshop2.csproj",
-      "packagesPath": "C:\\Users\\Abdim\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Abdim\\OneDrive\\Git\\Webshopp2\\Webshop2\\Webshop2\\obj\\",
+      "projectPath": "C:\\Users\\vince\\Skrivbord\\Webshopp2\\Webshop2\\Webshop2\\Webshop2.csproj",
+      "packagesPath": "C:\\Users\\vince\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\vince\\Skrivbord\\Webshopp2\\Webshop2\\Webshop2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Abdim\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\vince\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2954,7 +2954,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }
