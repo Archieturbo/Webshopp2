@@ -187,30 +187,36 @@ namespace Webshop2
                                 case "1":
                                     Console.Write("Ange nytt produktnamn: ");
                                     product.Name = Console.ReadLine();
+                                    Console.WriteLine("Ändringarna har sparats i databasen.");
                                     break;
                                 case "2":
                                     Console.Write("Ange ny infotext: ");
                                     product.Description = Console.ReadLine();
+                                    Console.WriteLine("Ändringarna har sparats i databasen.");
                                     break;
                                 case "3":
 
                                     Console.Write("Ange nytt pris: ");
                                     product.Price = double.Parse(Console.ReadLine());
+                                    Console.WriteLine("Ändringarna har sparats i databasen.");
                                     break;
                                 case "4":
 
                                     Console.Write("Ange ny produktkategori: ");
                                     product.CategoryId = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("Ändringarna har sparats i databasen.");
                                     break;
                                 case "5":
 
                                     Console.Write("Ange ny leverantör: ");
                                     product.SupplierId = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("Ändringarna har sparats i databasen.");
                                     break;
                                 case "6":
 
                                     Console.Write("Ange nytt lagersaldo: ");
                                     product.UnitsInStock = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("Ändringarna har sparats i databasen.");
                                     break;
                                 case "7":
                                     Console.Clear();
@@ -222,10 +228,12 @@ namespace Webshop2
                                     break;
                             }
 
-
+                            
                             db.SaveChanges();
-                            Console.WriteLine("Ändringarna har sparats i databasen.");
+                            break;
                         }
+
+                        break;
                     }
                 }
 
