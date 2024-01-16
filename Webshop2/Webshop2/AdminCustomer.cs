@@ -128,7 +128,6 @@ namespace Webshop2
                     CustomerChange();
                     break;
             }
-            // Spara ändringarna i databasen
             db.SaveChanges();
 
             Console.WriteLine("Kunduppgifter har uppdaterats.");
@@ -153,7 +152,6 @@ namespace Webshop2
 
                         foreach(var order in orderhistory)
                         {
-                            //var totalprize = order.Orderdetails.Select(tp  => tp.Price).ToList();
                             Console.Write($"OrderID: {order.Id}, Datum: {order.OrderDate}, Totalt pris:");
 
                             foreach(var orderdetails in order.Orderdetails)

@@ -10,33 +10,40 @@ namespace Webshop2
             using (var db = new MyDbContext())
             {
                 Console.WriteLine("Välkommen till webbshoppen!");
-
-                // Visa populära artiklar
                 ShowPopularItems();
-
-                // Visa huvudmeny och hantera användarens val
                 ShowMainMenu(db);
 
-                Console.ReadLine(); // Håller kvar konsolfönstret öppet tills användaren trycker på Enter.
+                Console.ReadLine();
             }
+
+
         }
 
-        static void ShowPopularItems()
+
+        public static void ShowPopularItems()
         {
             Console.WriteLine("Populära artiklar:");
 
-            var popularItems = new[]
+            using (var db = new MyDbContext())
             {
-                                new { Name = "T-shirt", Price = 452.78, Category = "Herr" },
-                                new { Name = "Nike Hoodie", Price = 845.56, Category = "Herr" },
-                                new { Name = "Jeans", Price = 1025.89, Category = "Dam" },
-                            };
+                var popularItems = db.Product
+                    .Where(p => p.IsPopular)
+                    .Include(p => p.Categories)
+                    .ToList();
 
-            foreach (var item in popularItems)
-            {
-                Console.WriteLine($"{item.Name}, Pris: {item.Price}, Kategori: {item.Category}");
+                foreach (var item in popularItems)
+                {
+                    Console.Write($"{item.Name}, Pris: {item.Price}, Kategori: ");
+
+                    foreach(var category in item.Categories)
+                    {
+                        Console.Write($"{category.CategoryName} ");
+                    }
+                    Console.WriteLine();
+                }
             }
         }
+
 
         static void ShowMainMenu(MyDbContext db)
         {
@@ -110,14 +117,13 @@ namespace Webshop2
                         case Helpers.MenuChoice.Admin:
                             Console.Clear();
                             Admin.AddNewProductMenu();
-                            //AdminCustomer.CustomerChange();
-                             
+
                             break;
 
                         case Helpers.MenuChoice.Exit:
                             running = false;
                             break;
-                        
+
 
                         default:
                             Console.WriteLine("Ogiltigt val. Försök igen.");
@@ -132,16 +138,9 @@ namespace Webshop2
 
 
         }
+
     }
 }
-           
-            
-
-
-
-        
-
-    
 
 
 
@@ -159,6 +158,13 @@ namespace Webshop2
 
 
 
-//Problem som måste lösas! 
- 
-//4. Småfix, lägg in trycatch, Fixa UPPER CASE på ja/nej när man lägger in i varukorg. 
+
+
+
+
+
+
+
+
+
+

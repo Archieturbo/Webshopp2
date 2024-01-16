@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Webshop2.Models;
 
 namespace Webshop2
-{  //Lägg till savechanges nånstans! 
+{
     internal class Admin
     {
         private static int productId;
@@ -36,7 +36,7 @@ namespace Webshop2
                 // Sätt produktens kategori-ID till det angivna värdet
                 product.CategoryId = categoryId;
 
-                // Spara ändringarna i databasen
+
                 db.SaveChanges();
 
                 Console.WriteLine($"Produktens kategori har ändrats till {category.CategoryName}.");
@@ -44,17 +44,64 @@ namespace Webshop2
         }
 
 
+        public static void SetPopularProducts()
+        {
+            using (var db = new MyDbContext())
+            {
+                Helpers.ShowAllProducts(db, "");
+              
+                Console.WriteLine("Ange ID för produkten du vill markera som populär (eller 0 för att avsluta): ");
+                int productId = int.Parse(Console.ReadLine());
+
+                if (productId == 0)
+                {
+                    return; // Avsluta om admin väljer 0
+                }
+
+                // Hämta produkten från databasen
+                var product = db.Product.FirstOrDefault(p => p.Id == productId);
+
+                if (product == null)
+                {
+                    Console.WriteLine("Produkten med det angivna ID:t hittades inte.");
+                    return;
+                }
+
+                Console.WriteLine($"Vill du markera '{product.Name}' som populär? (Ja/Nej)");
+                string answer = Console.ReadLine();
+
+                if (answer.ToLower() == "ja")
+                {
+                    product.IsPopular = true;
+                    db.SaveChanges();
+                    Console.WriteLine("Produkten har markerats som populär.");
+                }
+                else
+                {
+
+                    product.IsPopular = false;
+                    db.SaveChanges();
+                    Console.WriteLine("Produkten har tagits bort från populära produkter.");
+                }
+            }
+        }
+
+
+
+
         public static void AddNewProductMenu()
         {
             using (var db = new MyDbContext())
             {
+           
 
                 Console.WriteLine("1. Lägg till ny produkt");
                 Console.WriteLine("2. Ändra produkt");
                 Console.WriteLine("3. Ta bort produkt");
                 Console.WriteLine("4. Ändra uppgifter om kunden/Historik");
                 Console.WriteLine("5. Butiksstatus");
-                Console.WriteLine("6. Tillbaka till huvudmenyn");
+                Console.WriteLine("6. Välj populäraste produkter");
+                Console.WriteLine("7. Tillbaka till huvudmenyn");
                 Console.Write("Ange ditt val: ");
                 string subchoice = Console.ReadLine();
 
@@ -96,8 +143,9 @@ namespace Webshop2
                     db.Add(product1);
                     db.SaveChanges();
 
-                    ChangeProductCategory(productId, categoryId);
+                    productId = product1.Id;
 
+                    ChangeProductCategory(productId, categoryId);
 
                 }
 
@@ -112,11 +160,9 @@ namespace Webshop2
 
                         if (productId == 0)
                         {
-                            // Avsluta loopen om användaren väljer 0
                             break;
                         }
 
-                        // Hämta produkten från databasen
                         Product product = db.Product.FirstOrDefault(p => p.Id == productId);
 
                         if (product == null)
@@ -177,7 +223,6 @@ namespace Webshop2
                             }
 
 
-
                             db.SaveChanges();
                             Console.WriteLine("Ändringarna har sparats i databasen.");
                         }
@@ -205,7 +250,7 @@ namespace Webshop2
                 }
                 if (subchoice == "5")
                 {
-                    
+
                     while (true)
                     {
                         Console.Clear();
@@ -298,29 +343,29 @@ namespace Webshop2
 
                                 break;
 
-                                case "5":
+                            case "5":
                                 Console.Clear();
                                 AddNewProductMenu();
                                 break;
 
-
                         }
-
-
                         break;
-
-
 
                     }
                 }
-                 if (subchoice == "6")
+                if (subchoice == "6")
                 {
                     Console.Clear();
-                   
+                    SetPopularProducts();
+
                 }
+             
+                if (subchoice == "7")
+                {
+                    Console.Clear();
 
-
-
+                }
+           
 
             }
         }

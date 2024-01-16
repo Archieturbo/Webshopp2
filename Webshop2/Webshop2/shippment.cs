@@ -40,7 +40,7 @@ namespace Webshop2
                     Console.Write("Födelsedatum (YYYY-MM-DD): ");
                     string input = Console.ReadLine();
                     customerBirthday = DateTime.Parse(input);
-                    break; // Om konverteringen lyckas, bryt loopen
+                    break; 
                 }
                 catch (FormatException)
                 {
@@ -58,7 +58,6 @@ namespace Webshop2
         {
             if (phoneInput.Length == 10)
             {
-                // Telefonnumret har rätt längd
                 customerPhone = phoneInput;
                 break;
             }
@@ -153,7 +152,7 @@ namespace Webshop2
                 db.Order.Add(newOrder);
                 db.SaveChanges();
 
-                decimal totalAmount = Shoppingcart.CalculateTotalPrice() + (decimal)shippingPrice; // Lägg till frakten till det totala beloppet
+                decimal totalAmount = Shoppingcart.CalculateTotalPrice() + (decimal)shippingPrice; 
 
                 Console.WriteLine($"Totalpriset är: {totalAmount}");
                 Console.WriteLine($"Frakten är vald: {shippingPrice} SEK");

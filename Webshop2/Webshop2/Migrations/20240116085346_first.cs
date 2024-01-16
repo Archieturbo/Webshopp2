@@ -112,7 +112,8 @@ namespace Webshop2.Migrations
                     SupplierId = table.Column<int>(type: "int", nullable: true),
                     UnitsInStock = table.Column<int>(type: "int", nullable: true),
                     Price = table.Column<double>(type: "float", nullable: true),
-                    CategoryId = table.Column<int>(type: "int", nullable: true)
+                    CategoryId = table.Column<int>(type: "int", nullable: true),
+                    IsPopular = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

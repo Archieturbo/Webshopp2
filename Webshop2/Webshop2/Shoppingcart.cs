@@ -40,7 +40,7 @@ namespace Webshop2
             {
                 foreach (var product in shoppingCart)
                 {
-                    Console.WriteLine($"{product.Id}, {product.Name}, Pris: {product.Price:C}");
+                    Console.WriteLine($"{product.Id}, {product.Name}, Pris: {product.Price} Kr");
                 }
             }
             else
@@ -49,7 +49,7 @@ namespace Webshop2
             }
 
             Console.WriteLine("---------------------------------");
-            Console.WriteLine($"Totalt pris: {CalculateTotalPrice()}");
+            Console.WriteLine($"Totalt pris: {CalculateTotalPrice()} Kr");
             Console.WriteLine("---------------------------------");
         }
 
@@ -66,10 +66,8 @@ namespace Webshop2
                     Console.Write("Ange det nya antalet: ");
                     if (int.TryParse(Console.ReadLine(), out int newQuantity))
                     {
-                        // Tar bort de befintliga produkterna från varukorgen
                         shoppingCart.RemoveAll(p => p.Id == productId);
 
-                        // Lägger till de nya produkterna i varukorgen
                         for (int i = 0; i < newQuantity; i++)
                         {
                             shoppingCart.Add(productToUpdate);

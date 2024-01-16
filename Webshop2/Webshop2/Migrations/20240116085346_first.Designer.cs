@@ -12,7 +12,7 @@ using Webshop2.Models;
 namespace Webshop2.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20240111081542_first")]
+    [Migration("20240116085346_first")]
     partial class first
     {
         /// <inheritdoc />
@@ -188,6 +188,9 @@ namespace Webshop2.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsPopular")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

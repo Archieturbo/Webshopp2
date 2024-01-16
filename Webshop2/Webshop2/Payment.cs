@@ -12,10 +12,7 @@ namespace Webshop2
 
         public static void ProcessPayment(List<Product> shoppingCart, decimal totalAmount, MyDbContext db)
         {
-
-            // Visa betalningsmetoder
             ShowPaymentMethods();
-
             
             Console.Write("Välj betalningsmetod (1 eller 2): ");
             if (int.TryParse(Console.ReadLine(), out int paymentMethod))

@@ -84,7 +84,6 @@ namespace Webshop2.Models
                 Console.WriteLine($"Produkter i kategorin: {category.CategoryName}");
 
 
-                // Använder en switch för att visa produkter baserat på kategori
                 foreach (var product in category.Products)
                 {
                     switch (category.CategoryName)
@@ -131,7 +130,7 @@ namespace Webshop2.Models
                 Console.WriteLine($"ID: {product.Id}, {product.Name}, " +
                     $"Pris: {product.Price}, " +
                     $"Lager: {product.UnitsInStock}, " +
-                    $"Kategorier: {Helpers.GetCategoryNames(product.Categories)}");
+                    $"Kategori: {Helpers.GetCategoryNames(product.Categories)}");
 
             }
            
@@ -165,7 +164,7 @@ namespace Webshop2.Models
                 if (addToCartChoice == "nej")
                 {
                     Console.Clear();
-                    Helpers.ShowAllProducts(db, "herr");
+                    Helpers.ShowAllProducts(db, "");
                 }
             }
             else
