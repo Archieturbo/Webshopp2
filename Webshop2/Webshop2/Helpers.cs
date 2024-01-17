@@ -120,10 +120,10 @@ namespace Webshop2.Models
             var categoryNames = categories.Select(category => category.CategoryName);
             return string.Join(", ", categoryNames);
         }
-        public static void ShowAllProducts(MyDbContext db, string categories)
+        public static async Task ShowAllProductsAsync(MyDbContext db, string categories)
         {
             Console.WriteLine($"Alla produkter: ");
-            var products = db.Product.Include(p => p.Categories).ToList();
+            var products = await db.Product.Include(p => p.Categories).ToListAsync();
 
             foreach (var product in products)
             {
@@ -164,7 +164,7 @@ namespace Webshop2.Models
                 if (addToCartChoice == "nej")
                 {
                     Console.Clear();
-                    Helpers.ShowAllProducts(db, "");
+                    Helpers.ShowAllProductsAsync(db, "");
                 }
             }
             else

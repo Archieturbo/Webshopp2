@@ -11,7 +11,7 @@ namespace Webshop2
             {
                 Console.WriteLine("Välkommen till webbshoppen!");
                 ShowPopularItems();
-                ShowMainMenu(db);
+                ShowMainMenuAsync(db);
 
                 Console.ReadLine();
             }
@@ -45,7 +45,7 @@ namespace Webshop2
         }
 
 
-        static void ShowMainMenu(MyDbContext db)
+        static async Task ShowMainMenuAsync(MyDbContext db)
         {
             bool running = true;
             List<Product> shoppingCart = new List<Product>();
@@ -78,7 +78,7 @@ namespace Webshop2
 
                         case Helpers.MenuChoice.ShowAllProducts:
                             Console.Clear();
-                            Helpers.ShowAllProducts(db, "");
+                            await Helpers.ShowAllProductsAsync(db, "");
                             Helpers.ShowProductMenu(db);
                             break;
 

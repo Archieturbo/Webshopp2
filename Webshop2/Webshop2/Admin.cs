@@ -48,7 +48,7 @@ namespace Webshop2
         {
             using (var db = new MyDbContext())
             {
-                Helpers.ShowAllProducts(db, "");
+                Helpers.ShowAllProductsAsync(db, "");
               
                 Console.WriteLine("Ange ID för produkten du vill markera som populär (eller 0 för att avsluta): ");
                 int productId = int.Parse(Console.ReadLine());
@@ -154,7 +154,7 @@ namespace Webshop2
                 {
                     while (true)
                     {
-                        Helpers.ShowAllProducts(db, subchoice);
+                        Helpers.ShowAllProductsAsync(db, subchoice);
                         Console.WriteLine("Ange produkt-ID (eller 0 för att avsluta): ");
                         int productId = int.Parse(Console.ReadLine());
 
