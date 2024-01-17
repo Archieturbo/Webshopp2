@@ -139,7 +139,7 @@ namespace Webshop2.Models
         }
 
 
-        public static void ShowProductDetails(MyDbContext db, int productId)
+        public static async Task ShowProductDetailsAsync(MyDbContext db, int productId)
         {
             var product = db.Product.Find(productId);
 
@@ -207,7 +207,7 @@ namespace Webshop2.Models
                         if (int.TryParse(Console.ReadLine(), out int productId))
                         {
                             Console.Clear();
-                            ShowProductDetails(db, productId);
+                            Task.Run(() => ShowProductDetailsAsync(db, productId)).Wait();
 
                         }
 
@@ -264,6 +264,7 @@ namespace Webshop2.Models
                         break;
                     case 3:
                         Console.Clear();
+
                         break;
 
 
