@@ -9,7 +9,7 @@ namespace Webshop2
         {
             using (var db = new MyDbContext())
             {
-                Console.WriteLine("Välkommen till webbshoppen!");
+                Console.WriteLine("Välkommen till webbshopen!");
                 ShowPopularItems();
                 ShowMainMenu(db);
 
@@ -73,7 +73,7 @@ namespace Webshop2
                         case Helpers.MenuChoice.ShowAllCategories:
                             Console.Clear();
                             Helpers.ShowAllCategories(db);
-                            Helpers.ShowProductMenu(db);
+                            ShowMainMenu(db);
                             break;
 
                         case Helpers.MenuChoice.ShowAllProducts:
@@ -122,6 +122,7 @@ namespace Webshop2
 
                         case Helpers.MenuChoice.Exit:
                             running = false;
+                            Console.WriteLine("Webshopen stänger ner, ha en trevlig dag! :)");
                             break;
 
 

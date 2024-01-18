@@ -71,6 +71,11 @@ namespace Webshop2.Models
 
                 ShowProductsInCategory(db, selectedCategoryId);
             }
+            else
+            {
+                Console.Clear();
+                
+            }
         }
 
         public static void ShowProductsInCategory(MyDbContext db, int categoryId)
