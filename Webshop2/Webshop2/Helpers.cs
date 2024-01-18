@@ -189,8 +189,57 @@ namespace Webshop2.Models
 
             foreach (var product in matchingProducts)
             {
-                Console.WriteLine($"ID: {product.Id}, Namn: {product.Name}, Pris: {product.Price}");
+                Console.WriteLine($"ID: {product.Id}, Namn: {product.Name}, Pris: {product.Price} Antal i lager: {product.UnitsInStock}");
                 Console.WriteLine($"Beskrivning: {product.Description}");
+           
+            }
+            Console.WriteLine("vill du lägga en produkt i varukorgen?");
+            Console.WriteLine("1: JA");
+            Console.WriteLine("2: NEJ");
+            var choice = int .Parse( Console.ReadLine() );
+            switch (choice)
+            {
+                 
+                case 1:
+                    if (matchingProducts.Any())
+                    {
+
+                        Console.WriteLine("Ange produkt Id ");
+
+                        if (int.TryParse(Console.ReadLine(), out int selectedproductId) && selectedproductId != 0)
+                        {
+                            var selectedproducted = matchingProducts.FirstOrDefault(p => p.Id == selectedproductId);
+                            if (selectedproducted != null)
+                            {
+                                bool quantityIsAvaible = false;
+                                while (!quantityIsAvaible)
+                                {
+                                    Console.WriteLine("Ange antal");
+                                    if (int.TryParse(Console.ReadLine(), out int quantity) && quantity > 0 && quantity <= selectedproducted.UnitsInStock)
+                                    {
+                                        for (int i = 0; i < quantity; i++)
+                                        {
+                                            Shoppingcart.shoppingCart.Add(selectedproducted);
+                                        }
+                                        Console.WriteLine($"{quantity}st {selectedproducted.Name} har lagts till i varukorgen ");
+                                        quantityIsAvaible = true;
+                                       
+                                    }
+                              
+                                    else
+                                    {
+                                        Console.WriteLine("ogiltig antal, vänligen försök igen");
+                                    }
+                                }
+                            }
+
+                        }
+                         
+                    }
+                    break;
+                    case 2:
+                  Console.Clear();
+                    break;
             }
         }
         public static void ShowProductMenu(MyDbContext db)

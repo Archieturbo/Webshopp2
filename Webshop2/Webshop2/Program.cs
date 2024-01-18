@@ -93,7 +93,7 @@ namespace Webshop2
                             Console.Write("Ange sökterm: ");
                             string searchTerm = Console.ReadLine();
                             Helpers.SearchProducts(db, searchTerm);
-                            Console.WriteLine($"Sökresultat för: {searchTerm}");
+                            ShowMainMenu(db);
                             break;
 
                         case Helpers.MenuChoice.UpdateQuantity:
