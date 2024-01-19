@@ -200,7 +200,7 @@ namespace Webshop2.Models
         }
         public static void ShowProductMenu(MyDbContext db)
         {
-            Console.WriteLine("1. Visa detaljer för en produkt");
+            Console.WriteLine("\n" + "1. Visa detaljer för en produkt");
             Console.WriteLine("2. Lägg till i varukorgen");
             Console.WriteLine("3. Tillbaka till huvudmenyn");
             Console.Write("Ange ditt val: ");

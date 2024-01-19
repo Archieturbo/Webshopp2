@@ -87,7 +87,7 @@ namespace Webshop2
 
         public static Delivery SelectShippingMethod()
         {
-            Console.WriteLine("välj leverans metod:");
+            Console.WriteLine("\n" + "välj leverans metod:");
             Console.WriteLine("1. Postnord - 50 SEK");
             Console.WriteLine("2. DHL - 100 SEK");
 
@@ -152,10 +152,11 @@ namespace Webshop2
                 db.Order.Add(newOrder);
                 db.SaveChanges();
 
-                decimal totalAmount = Shoppingcart.CalculateTotalPrice() + (decimal)shippingPrice; 
+                decimal totalAmount = Shoppingcart.CalculateTotalPrice() + (decimal)shippingPrice;
 
-                Console.WriteLine($"Totalpriset är: {totalAmount}");
                 Console.WriteLine($"Frakten är vald: {shippingPrice} SEK");
+                Console.WriteLine($"Totalpriset + moms är: {totalAmount:C2} \n");
+
             }
         }
     }

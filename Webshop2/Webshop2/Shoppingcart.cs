@@ -49,7 +49,7 @@ namespace Webshop2
             }
 
             Console.WriteLine("---------------------------------");
-            Console.WriteLine($"Totalt pris: {CalculateTotalPrice()} Kr");
+            Console.WriteLine($"Totalt pris inklusive moms: {CalculateTotalPrice():C2}");
             Console.WriteLine("---------------------------------");
         }
 
@@ -131,6 +131,9 @@ namespace Webshop2
             if (shoppingCart.Sum(p => p.Price) != null)
             {
                 total = (decimal)shoppingCart.Sum(p => p.Price);
+
+                decimal VAT = total * 0.25m;
+                total += VAT;
             }
 
             return total;

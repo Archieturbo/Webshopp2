@@ -157,7 +157,7 @@ namespace Webshop2
                     while (true)
                     {
                         Helpers.ShowAllProductsAsync(db, subchoice);
-                        Console.WriteLine("Ange produkt-ID (eller 0 för att avsluta): ");
+                        Console.WriteLine("Ange produkt-ID (eller 0 för att avsluta): "+ "\n");
                         int productId = int.Parse(Console.ReadLine());
 
                         if (productId == 0)
@@ -241,8 +241,8 @@ namespace Webshop2
 
                 if (subchoice == "3")
                 {
-
-                    Console.WriteLine("Ange produkt-ID: ");
+                    Helpers.ShowAllProductsAsync(db, "");
+                    Console.WriteLine("Ange produkt-ID: " + "\n");
                     int productId = int.Parse(Console.ReadLine());
 
 
