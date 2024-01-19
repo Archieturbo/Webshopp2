@@ -56,7 +56,7 @@ namespace Webshop2.Models
 
         public static void ShowAllCategories(MyDbContext db)
         {
-            Console.WriteLine("Alla kategorier:");
+            Console.WriteLine("Alla kategorier: " + "\n");
 
             var categories = db.Category.ToList();
 
@@ -65,6 +65,7 @@ namespace Webshop2.Models
                 Console.WriteLine($"ID: {category.Id}, Kategori: {category.CategoryName}");
             }
 
+            Console.WriteLine();
             Console.WriteLine("Välj en kategori för att visa produkter (tryck 0 för att gå tillbaka):");
             if (int.TryParse(Console.ReadLine(), out int selectedCategoryId) && selectedCategoryId > 0)
             {
@@ -86,7 +87,9 @@ namespace Webshop2.Models
 
             if (category != null)
             {
-                Console.WriteLine($"Produkter i kategorin: {category.CategoryName}");
+                Console.Clear();
+                Console.WriteLine($"Produkter i kategorin: {category.CategoryName}" + "\n");
+                
 
 
                 foreach (var product in category.Products)
@@ -127,7 +130,8 @@ namespace Webshop2.Models
         }
         public static async Task ShowAllProductsAsync(MyDbContext db, string categories)
         {
-            Console.WriteLine($"Alla produkter: ");
+            Console.WriteLine($"Alla produkter: " + "\n");
+            
             var products = await db.Product.Include(p => p.Categories).ToListAsync();
 
             foreach (var product in products)
@@ -139,7 +143,7 @@ namespace Webshop2.Models
 
             }
            
-            Console.WriteLine("---------------------------------");
+            Console.WriteLine();
             
         }
 
@@ -169,7 +173,6 @@ namespace Webshop2.Models
                 if (addToCartChoice == "nej")
                 {
                     Console.Clear();
-                    Helpers.ShowAllProductsAsync(db, "");
                 }
             }
             else
@@ -185,62 +188,15 @@ namespace Webshop2.Models
                 .Where(p => p.Name.Contains(searchTerm) || p.Description.Contains(searchTerm))
                 .ToList();
 
-            Console.WriteLine($"Sökresultat för: {searchTerm}");
+            Console.WriteLine($"Sökresultat för: {searchTerm}" + "\n");
 
             foreach (var product in matchingProducts)
             {
                 Console.WriteLine($"ID: {product.Id}, Namn: {product.Name}, Pris: {product.Price} Antal i lager: {product.UnitsInStock}");
-                Console.WriteLine($"Beskrivning: {product.Description}");
+                Console.WriteLine($"Beskrivning: {product.Description}" + "\n");
            
             }
-            Console.WriteLine("vill du lägga en produkt i varukorgen?");
-            Console.WriteLine("1: JA");
-            Console.WriteLine("2: NEJ");
-            var choice = int .Parse( Console.ReadLine() );
-            switch (choice)
-            {
-                 
-                case 1:
-                    if (matchingProducts.Any())
-                    {
-
-                        Console.WriteLine("Ange produkt Id ");
-
-                        if (int.TryParse(Console.ReadLine(), out int selectedproductId) && selectedproductId != 0)
-                        {
-                            var selectedproducted = matchingProducts.FirstOrDefault(p => p.Id == selectedproductId);
-                            if (selectedproducted != null)
-                            {
-                                bool quantityIsAvaible = false;
-                                while (!quantityIsAvaible)
-                                {
-                                    Console.WriteLine("Ange antal");
-                                    if (int.TryParse(Console.ReadLine(), out int quantity) && quantity > 0 && quantity <= selectedproducted.UnitsInStock)
-                                    {
-                                        for (int i = 0; i < quantity; i++)
-                                        {
-                                            Shoppingcart.shoppingCart.Add(selectedproducted);
-                                        }
-                                        Console.WriteLine($"{quantity}st {selectedproducted.Name} har lagts till i varukorgen ");
-                                        quantityIsAvaible = true;
-                                       
-                                    }
-                              
-                                    else
-                                    {
-                                        Console.WriteLine("ogiltig antal, vänligen försök igen");
-                                    }
-                                }
-                            }
-
-                        }
-                         
-                    }
-                    break;
-                    case 2:
-                  Console.Clear();
-                    break;
-            }
+           
         }
         public static void ShowProductMenu(MyDbContext db)
         {

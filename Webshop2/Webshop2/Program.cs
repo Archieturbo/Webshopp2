@@ -10,6 +10,7 @@ namespace Webshop2
             using (var db = new MyDbContext())
             {
                 Console.WriteLine("Välkommen till webbshopen!");
+                Console.WriteLine();
                 ShowPopularItems();
                 ShowMainMenu(db);
 
@@ -73,7 +74,7 @@ namespace Webshop2
                         case Helpers.MenuChoice.ShowAllCategories:
                             Console.Clear();
                             Helpers.ShowAllCategories(db);
-                            ShowMainMenu(db);
+                            Helpers.ShowProductMenu(db);
                             break;
 
                         case Helpers.MenuChoice.ShowAllProducts:
@@ -93,7 +94,8 @@ namespace Webshop2
                             Console.Write("Ange sökterm: ");
                             string searchTerm = Console.ReadLine();
                             Helpers.SearchProducts(db, searchTerm);
-                            ShowMainMenu(db);
+                            Helpers.ShowProductMenu(db);
+                            //ShowMainMenu(db);
                             break;
 
                         case Helpers.MenuChoice.UpdateQuantity:
