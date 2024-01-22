@@ -66,8 +66,8 @@ namespace Webshop2
                 Console.WriteLine("Lista över kunder:");
                 foreach (var customer in customers)
                 {
-                    Console.WriteLine($"KundID: {customer.Id}, Namn: {customer.Name}, Email: {customer.Email}, Address: {customer.Adress}," +
-                        $" Land: {customer.Country}, Stad: {customer.City}, Födelsedatum: {customer.Birthday}, Tel: {customer.Phone}");
+                    Console.WriteLine($"KundID: {customer.Id} \n Namn: {customer.Name} \n Email: {customer.Email}\n Address: {customer.Adress}\n" +
+                        $" Land: {customer.Country}\n Stad: {customer.City}\n Födelsedatum: {customer.Birthday}\n Tel: {customer.Phone} \n");
                 }
             }
             else
@@ -148,7 +148,7 @@ namespace Webshop2
                             .Where(o => o.CustomerId == customerId)
                             .ToList();
 
-                        Console.WriteLine($"Beställningshistorik för: {customer.Name} med Id: {customer.Id}");
+                        Console.WriteLine($"Beställningshistorik för: {customer.Name} med Id: {customer.Id} \n");
 
                         foreach(var order in orderhistory)
                         {
@@ -157,7 +157,7 @@ namespace Webshop2
                             foreach(var orderdetails in order.Orderdetails)
                             {
                                 
-                                Console.Write($"{orderdetails.Price}");
+                                Console.Write($"{orderdetails.Price:c2}");
                                 
                                
                             }
