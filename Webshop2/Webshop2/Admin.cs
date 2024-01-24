@@ -95,7 +95,7 @@ namespace Webshop2
         {
             using (var db = new MyDbContext())
             {
-           
+
 
                 Console.WriteLine("1. Lägg till ny produkt");
                 Console.WriteLine("2. Ändra produkt");
@@ -152,12 +152,12 @@ namespace Webshop2
                 }
 
 
-                if (subchoice == "2")
+                else if (subchoice == "2")
                 {
                     while (true)
                     {
                         Helpers.ShowAllProductsAsync(db, subchoice);
-                        Console.WriteLine("Ange produkt-ID (eller 0 för att avsluta): "+ "\n");
+                        Console.WriteLine("Ange produkt-ID (eller 0 för att avsluta): " + "\n");
                         int productId = int.Parse(Console.ReadLine());
 
                         if (productId == 0)
@@ -190,35 +190,41 @@ namespace Webshop2
                                     Console.Write("Ange nytt produktnamn: ");
                                     product.Name = Console.ReadLine();
                                     Console.WriteLine("Ändringarna har sparats i databasen.");
+                                    Thread.Sleep(3000);
                                     break;
                                 case "2":
                                     Console.Write("Ange ny infotext: ");
                                     product.Description = Console.ReadLine();
                                     Console.WriteLine("Ändringarna har sparats i databasen.");
+                                    Thread.Sleep(3000);
                                     break;
                                 case "3":
 
                                     Console.Write("Ange nytt pris: ");
                                     product.Price = double.Parse(Console.ReadLine());
                                     Console.WriteLine("Ändringarna har sparats i databasen.");
+                                    Thread.Sleep(3000);
                                     break;
                                 case "4":
 
                                     Console.Write("Ange ny produktkategori: ");
                                     product.CategoryId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Ändringarna har sparats i databasen.");
+                                    Thread.Sleep(3000);
                                     break;
                                 case "5":
 
                                     Console.Write("Ange ny leverantör: ");
                                     product.SupplierId = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Ändringarna har sparats i databasen.");
+                                    Thread.Sleep(3000);
                                     break;
                                 case "6":
 
                                     Console.Write("Ange nytt lagersaldo: ");
                                     product.UnitsInStock = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Ändringarna har sparats i databasen.");
+                                    Thread.Sleep(3000);
                                     break;
                                 case "7":
                                     Console.Clear();
@@ -230,16 +236,18 @@ namespace Webshop2
                                     break;
                             }
 
-                            
+
                             db.SaveChanges();
                             break;
                         }
 
                         break;
                     }
+                    Console.Clear();
+                    AddNewProductMenu();
                 }
 
-                if (subchoice == "3")
+                else if (subchoice == "3")
                 {
                     Helpers.ShowAllProductsAsync(db, "");
                     Console.WriteLine("Ange produkt-ID: " + "\n");
@@ -251,14 +259,14 @@ namespace Webshop2
 
                     Console.WriteLine("Produkten har tagits bort från databasen.");
                 }
-                if (subchoice == "4")
+                else if (subchoice == "4")
                 {
                     Console.Clear();
                     AdminCustomer.CustomerChange();
 
 
                 }
-                if (subchoice == "5")
+                else if (subchoice == "5")
                 {
 
                     while (true)
@@ -363,19 +371,19 @@ namespace Webshop2
 
                     }
                 }
-                if (subchoice == "6")
+                else if (subchoice == "6")
                 {
                     Console.Clear();
                     SetPopularProducts();
 
                 }
-             
-                if (subchoice == "7")
+
+                else if (subchoice == "7")
                 {
                     Console.Clear();
 
                 }
-           
+
 
             }
         }
