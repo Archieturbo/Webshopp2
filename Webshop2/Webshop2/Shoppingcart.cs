@@ -27,6 +27,7 @@ namespace Webshop2
                 }
 
                 Console.WriteLine($"{product.Name}, Antal: {quantity} har lagts till i varukorgen");
+             
 
             }
         }

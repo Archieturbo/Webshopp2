@@ -75,12 +75,18 @@ namespace Webshop2
                             Console.Clear();
                             Helpers.ShowAllCategories(db);
                             Helpers.ShowProductMenu(db);
+                            Thread.Sleep(3000);
+                            Console.Clear();
+                            ShowPopularItems();
                             break;
 
                         case Helpers.MenuChoice.ShowAllProducts:
                             Console.Clear();
                             Task.Run(() => Helpers.ShowAllProductsAsync(db, "")).Wait();
                             Helpers.ShowProductMenu(db);
+                            Thread.Sleep(3000);
+                            Console.Clear();
+                            ShowPopularItems();
                             break;
 
                         case Helpers.MenuChoice.ShowShoppingCart:
@@ -95,7 +101,7 @@ namespace Webshop2
                             string searchTerm = Console.ReadLine();
                             Helpers.SearchProducts(db, searchTerm);
                             Helpers.ShowProductMenu(db);
-                            //ShowMainMenu(db);
+                            ShowPopularItems();
                             break;
 
                         case Helpers.MenuChoice.UpdateQuantity:
@@ -110,16 +116,24 @@ namespace Webshop2
 
                         case Helpers.MenuChoice.Pay:
                             Console.Clear();
-                            Customer customerinfo = shippment.GetCustomerInfo();
-                            Delivery delivery = shippment.SelectShippingMethod();
-                            shippment.PlaceOrder(customerinfo, delivery.Price, delivery);
-                            decimal totalAmount = Shoppingcart.CalculateTotalPrice();
-                            Payment.ProcessPayment(shoppingCart, totalAmount, db);
+                            if (Shoppingcart.shoppingCart.Count > 0)
+                            {
+
+
+                                Customer customerinfo = shippment.GetCustomerInfo();
+                                Delivery delivery = shippment.SelectShippingMethod();
+                                shippment.PlaceOrder(customerinfo, delivery.Price, delivery);
+                                decimal totalAmount = Shoppingcart.CalculateTotalPrice();
+                                Payment.ProcessPayment(shoppingCart, totalAmount, db);
+                            }
+                            else
+                            {
+                                Console.WriteLine("kontrollera varukorgen att den inte är tom");
+                            }
                             break;
                         case Helpers.MenuChoice.Admin:
                             Console.Clear();
-                            Admin.AddNewProductMenu();
-
+                            Admin.AddNewProductMenu();                          
                             break;
 
                         case Helpers.MenuChoice.Exit:

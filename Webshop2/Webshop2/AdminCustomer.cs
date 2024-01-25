@@ -152,19 +152,9 @@ namespace Webshop2
 
                         foreach(var order in orderhistory)
                         {
-                            Console.Write($"OrderID: {order.Id}, Datum: {order.OrderDate}, Totalt pris:");
-
-                            foreach(var orderdetails in order.Orderdetails)
-                            {
-                                
-                                Console.Write($"{orderdetails.Price:c2}");
-                                
-                               
-                            }
+                            Console.Write($"OrderID: {order.Id}, Datum: {order.OrderDate}, Totalt pris: {order.CalculateTotalAmount()}");
                          
                         }
-                       
-                        
                     }
                 }
             }

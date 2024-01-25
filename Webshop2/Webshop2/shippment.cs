@@ -12,79 +12,79 @@ namespace Webshop2
     {
         public static Customer GetCustomerInfo()
         {
+          
+                Console.WriteLine("Fyll i leveransinformation:");
 
+                Console.Write("Namn: ");
+                string customerName = Console.ReadLine();
 
-            Console.WriteLine("Fyll i leveransinformation:");
+                Console.Write("Adress: ");
+                string customerAddress = Console.ReadLine();
 
-            Console.Write("Namn: ");
-            string customerName = Console.ReadLine();
+                Console.Write("Land: ");
+                string customerCountry = Console.ReadLine();
 
-            Console.Write("Adress: ");
-            string customerAddress = Console.ReadLine();
+                Console.Write("Stad: ");
+                string customerCity = Console.ReadLine();
 
-            Console.Write("Land: ");
-            string customerCountry = Console.ReadLine();
+                Console.Write("Email: ");
+                string customerEmail = Console.ReadLine();
 
-            Console.Write("Stad: ");
-            string customerCity = Console.ReadLine();
+                DateTime customerBirthday;
 
-            Console.Write("Email: ");
-            string customerEmail = Console.ReadLine();
-
-            DateTime customerBirthday;
-
-            while (true)
-            {
-                try
+                while (true)
                 {
-                    Console.Write("Födelsedatum (YYYY-MM-DD): ");
-                    string input = Console.ReadLine();
-                    customerBirthday = DateTime.Parse(input);
-                    break; 
+                    try
+                    {
+                        Console.Write("Födelsedatum (YYYY-MM-DD): ");
+                        string input = Console.ReadLine();
+                        customerBirthday = DateTime.Parse(input);
+                        break;
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Ogiltigt datumformat. Ange datumet i formatet YYYY-MM-DD.");
+                    }
                 }
-                catch (FormatException)
+
+                string customerPhone;
+                while (true)
                 {
-                    Console.WriteLine("Ogiltigt datumformat. Ange datumet i formatet YYYY-MM-DD." );
+                    Console.Write("Tel: ");
+                    string phoneInput = Console.ReadLine();
+
+                    try
+                    {
+                        if (phoneInput.Length == 10)
+                        {
+                            customerPhone = phoneInput;
+                            break;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ogiltig längd på telefonnummer. Ange 10 siffror.");
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        Console.WriteLine("Felaktigt format på telefonnumret. Ange 10 siffror.");
+                    }
                 }
+                return new Customer
+                {
+                    Name = customerName,
+                    Country = customerCountry,
+                    Adress = customerAddress,
+                    City = customerCity,
+                    Birthday = customerBirthday,
+                    Phone = customerPhone,
+                    Email = customerEmail
+                };
+
             }
-            
-        string customerPhone;
-    while (true)
-    {
-        Console.Write("Tel: ");
-        string phoneInput = Console.ReadLine();
-
-        try
-        {
-            if (phoneInput.Length == 10)
-            {
-                customerPhone = phoneInput;
-                break;
-            }
-            else
-            {
-                Console.WriteLine("Ogiltig längd på telefonnummer. Ange 10 siffror.");
-            }
-        }
-        catch (FormatException)
-        {
-    Console.WriteLine("Felaktigt format på telefonnumret. Ange 10 siffror.");
-}
-    }
-
-    return new Customer
-    {
-        Name = customerName,
-        Country = customerCountry,
-        Adress = customerAddress,
-        City = customerCity,
-        Birthday = customerBirthday,
-        Phone = customerPhone,
-        Email = customerEmail
-    };
-}
-
-
+           
+             
+      
         public static Delivery SelectShippingMethod()
         {
             Console.WriteLine("\n" + "välj leverans metod:");

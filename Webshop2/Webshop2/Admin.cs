@@ -302,6 +302,7 @@ namespace Webshop2
                                     Console.WriteLine("Antal sålda: " + item.TotalQuantitySold);
                                     Console.WriteLine();
                                 }
+                                AddNewProductMenu();
                                 break;
                             case "2":
                                 Console.Clear();
@@ -314,6 +315,7 @@ namespace Webshop2
                                 {
                                     Console.WriteLine("Produktnamn: " + product.Name + " Pris: " + product.Price + "kr");
                                 }
+                                AddNewProductMenu();
                                 break;
 
 
@@ -331,6 +333,7 @@ namespace Webshop2
                                 {
                                     Console.WriteLine($"{sales.Supplier.CompanyName}  {sales.TotalSales:C2}");
                                 }
+                                AddNewProductMenu();
                                 break;
                             case "4":
                                 Console.Clear();
@@ -358,7 +361,7 @@ namespace Webshop2
                                     Console.WriteLine("----------------");
 
                                 }
-
+                                AddNewProductMenu();
                                 break;
 
                             case "5":
